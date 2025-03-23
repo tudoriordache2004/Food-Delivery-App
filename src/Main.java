@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -26,6 +27,10 @@ public class Main {
         // Creare utilizator
         User user1 = new User("Popescu", "Ion", "Bucuresti", 25, "ion.popescu@email.com");
 
+        // Creare voucher
+        Voucher voucher1 = new Voucher("X123F5G", 25, LocalDate.of(2025, 10, 30));
+        user1.adaugaVoucher(voucher1);
+        
         // Testare metoda creeazaComanda
         Scanner scanner = new Scanner(System.in);
         user1.creeazaComanda(restaurante, scanner);

@@ -5,6 +5,7 @@ public class User extends Persoana {
     private static int nrUseri;
     private int idUser;
     private ArrayList<Comanda> comenzi;
+    private ArrayList<Voucher> vouchere;
 
     // Bloc static
     static {
@@ -21,20 +22,22 @@ public class User extends Persoana {
     User() {
         super();
         comenzi = new ArrayList<Comanda>();
+        vouchere = new ArrayList<>();
     }
 
     // Constructor parametrizat
     User(String nume, String prenume, String adresa, int varsta, String email) {
         super(nume, prenume, adresa, varsta, email);
         comenzi = new ArrayList<Comanda>();
+        vouchere = new ArrayList<>();
     }
 
     // Constructor de copiere
     User(User other) {
         super(other.nume, other.prenume, other.adresa, other.varsta, other.email);
         this.idUser = other.idUser;
-
-        this.comenzi = new ArrayList<Comanda>();
+        this.comenzi = new ArrayList<>(other.comenzi);
+        this.vouchere = new ArrayList<>(other.vouchere);
         this.comenzi.addAll(other.comenzi);
     }
 
@@ -46,6 +49,22 @@ public class User extends Persoana {
     }
 
     // Alte metode
+    public void istoricComenzi() {
+        for (Comanda comanda : comenzi) {
+            System.out.println(comanda.toString());
+        }
+    }
+
+    public void adaugaVoucher(Voucher voucher) {
+        this.vouchere.add(voucher);
+    }
+
+    public void afiseazaVouchere() {
+        for (Voucher voucher : vouchere) {
+            System.out.println(voucher);
+        }
+    }
+
     public void creeazaComanda(ArrayList<Restaurant> restaurante, Scanner scanner) {
         while (true) {
             System.out.println("Selectati restaurantul dorit. In caz de anulare, selectati 0:");
@@ -102,6 +121,26 @@ public class User extends Persoana {
 
                 System.out.println("Ati adaugat " + cantitate + " x " + produsAles.getNumeProdus());
 
+                System.out.println("Doriti sa adaugati un voucher? \n1. DA \n2. NU");
+                int inputVoucher = scanner.nextInt();
+
+                if (inputVoucher == 1) {
+                    if (!this.vouchere.isEmpty()) {
+                        System.out.println("Vouchere disponibile:");
+                        for (int i = 0; i < this.vouchere.size(); i++) {
+                            System.out.println(i + 1 + ". " + this.vouchere.get(i));
+                        }
+                        System.out.println("Selectati voucherul dorit (sau -1 pentru a nu aplica niciun voucher):");
+                        int voucherIndex = scanner.nextInt();
+                        if (voucherIndex >= 1 && voucherIndex <= this.vouchere.size()) {
+                            comanda.aplicaVoucher(this.vouchere.get(voucherIndex - 1));
+                            System.out.println("Ati selectat " + this.vouchere.get(voucherIndex - 1));
+                        }
+                    } else {
+                        System.out.println("Nu aveti vouchere disponibile.");
+                    }
+                }
+
                 System.out.println("Doriti sa mai adaugati alte produse? \n1. DA \n2. NU, finalizeaza comanda");
                 int inputAlteProduse = scanner.nextInt();
 
@@ -116,11 +155,6 @@ public class User extends Persoana {
         }
     }
 
-    public void istoricComenzi() {
-        for (Comanda comanda : comenzi) {
-            System.out.println(comanda.toString());
-        }
-    }
 
 }
 

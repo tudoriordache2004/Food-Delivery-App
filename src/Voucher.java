@@ -6,19 +6,6 @@ public class Voucher {
     private String codVoucher;
     private double valoareReducere;
     private LocalDate dataExpirare;
-    private static int numarVouchere;
-    private int idVoucher;
-
-    // Bloc static
-    static {
-        numarVouchere = 0;
-        System.out.println("Initializare, numar de vouchere = 0");
-    }
-
-    // Bloc nestatic
-    {
-        idVoucher = ++numarVouchere;
-    }
 
     // Constructor fara parametri
     public Voucher() {
@@ -39,7 +26,6 @@ public class Voucher {
         this.codVoucher = other.codVoucher;
         this.valoareReducere = other.valoareReducere;
         this.dataExpirare = other.dataExpirare;
-        this.idVoucher = other.idVoucher;
     }
 
     // Getteri
@@ -55,9 +41,6 @@ public class Voucher {
         return dataExpirare;
     }
 
-    public int getIdVoucher() {
-        return idVoucher;
-    }
 
     // Setteri
     public void setCodVoucher(String codVoucher) {
@@ -70,6 +53,13 @@ public class Voucher {
 
     public void setDataExpirare(LocalDate dataExpirare) {
         this.dataExpirare = dataExpirare;
+    }
+
+    @Override
+    public String toString() {
+        return "Voucher " + codVoucher +
+                ", valoareReducere = " + valoareReducere +
+                ", dataExpirare = " + dataExpirare;
     }
 
 }

@@ -1,13 +1,15 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Comanda {
     private static int nrComenzi;
     private int idComanda;
-    User user;
-    Restaurant restaurant;
-    ArrayList<Produs> listaProduse;
+    private User user;
+    private Restaurant restaurant;
+    private Voucher voucher;
+    private ArrayList<Produs> listaProduse;
     boolean comandaLivrata;
-    String dataComenzii;
+    private String dataComenzii;
 
     // Bloc static
     static {
@@ -32,7 +34,7 @@ public class Comanda {
     public Comanda(User user, Restaurant restaurant, String dataComenzii) {
         this.user = user;
         this.restaurant = restaurant;
-        this.listaProduse = new ArrayList<>(listaProduse);
+        this.listaProduse = new ArrayList<>();
         this.comandaLivrata = false;
         this.dataComenzii = dataComenzii;
     }
@@ -116,9 +118,22 @@ public class Comanda {
         for (Produs produs : listaProduse) {
             costTotal += produs.getPret();
         }
+        if (voucher != null) {
+            costTotal -= voucher.getValoareReducere();
+        }
+        if (costTotal <= 0) {
+            return 0;
+        }
         return costTotal;
     }
 
+    public void aplicaVoucher(Voucher voucher) {
+        if (voucher != null && voucher.getDataExpirare().isAfter(LocalDate.now())) {
+            this.voucher = voucher;
+        } else {
+            System.out.println("Voucher invalid sau expirat.");
+        }
+    }
 
 }
 
