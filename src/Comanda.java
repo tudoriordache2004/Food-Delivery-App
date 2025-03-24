@@ -8,8 +8,8 @@ public class Comanda {
     private Restaurant restaurant;
     private Voucher voucher;
     private ArrayList<Produs> listaProduse;
-    boolean comandaLivrata;
     private String dataComenzii;
+    private StatusComanda status;
 
     // Bloc static
     static {
@@ -26,7 +26,7 @@ public class Comanda {
         this.user = null;
         this.restaurant = null;
         this.listaProduse = new ArrayList<>();
-        this.comandaLivrata = false;
+        this.status = StatusComanda.IN_ASTEPTARE;
         this.dataComenzii = "";
     }
 
@@ -35,7 +35,7 @@ public class Comanda {
         this.user = user;
         this.restaurant = restaurant;
         this.listaProduse = new ArrayList<>();
-        this.comandaLivrata = false;
+        this.status = StatusComanda.IN_ASTEPTARE;
         this.dataComenzii = dataComenzii;
     }
 
@@ -45,7 +45,7 @@ public class Comanda {
         this.user = other.user;
         this.restaurant = other.restaurant;
         this.listaProduse = new ArrayList<>(other.listaProduse);
-        this.comandaLivrata = other.comandaLivrata;
+        this.status = other.status;
         this.dataComenzii = other.dataComenzii;
     }
 
@@ -66,16 +66,16 @@ public class Comanda {
         return listaProduse;
     }
 
-    public boolean getcomandaLivrata() {
-        return comandaLivrata;
-    }
-
     public String getDataComenzii() {
         return dataComenzii;
     }
 
     public static int getNrComenzi() {
         return nrComenzi;
+    }
+
+    public StatusComanda getStatus() {
+        return status;
     }
 
     // Setteri
@@ -91,16 +91,19 @@ public class Comanda {
         this.listaProduse = listaProduse;
     }
 
-
     public void setDataComenzii(String dataComenzii) {
         this.dataComenzii = dataComenzii;
+    }
+
+    public void setStatusComanda(StatusComanda status) {
+        this.status = status;
     }
 
     @Override
     public String toString() {
         return "Restaurant: " + (restaurant != null ? restaurant.getNume() : "N/A") + '\n' +
                 "Produse: " + listaProduse.toString() +
-                ", Status: " + (comandaLivrata ? " livrata" : " nelivrata") +
+                ", Status: " + status +
                 ", Data: " + dataComenzii;
     }
 

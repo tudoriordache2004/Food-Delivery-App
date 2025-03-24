@@ -29,14 +29,13 @@ public class Rider extends Persoana {
     }
 
     // Constructor de copiere
-    Rider(Rider other){
+    Rider(Rider other) {
         this.nume = other.nume;
         this.prenume = other.prenume;
         this.adresa = other.adresa;
         this.varsta = other.varsta;
         this.email = other.email;
         this.idRider = other.idRider;
-
         this.livrari = new ArrayList<Comanda>();
         this.livrari.addAll(other.livrari);
     }
@@ -46,4 +45,6 @@ public class Rider extends Persoana {
     public int getId() {
         return idRider;
     }
+
+
 }

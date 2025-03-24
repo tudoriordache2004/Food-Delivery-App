@@ -109,6 +109,18 @@ public class Restaurant {
         meniu.add(produs);
     }
 
+    public void preiaComanda(Comanda comanda) {
+        comanda.setStatusComanda(StatusComanda.PRELUATA);
+    }
+
+    public void preparaComanda(Comanda comanda) {
+        comanda.setStatusComanda(StatusComanda.IN_PREPARARE);
+    }
+
+    public void trimiteComanda(Comanda comanda) {
+        comanda.setStatusComanda(StatusComanda.IN_LIVRARE);
+    }
+
 
 }
 

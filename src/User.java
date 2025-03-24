@@ -58,12 +58,7 @@ public class User extends Persoana {
     public void adaugaVoucher(Voucher voucher) {
         this.vouchere.add(voucher);
     }
-
-    public void afiseazaVouchere() {
-        for (Voucher voucher : vouchere) {
-            System.out.println(voucher);
-        }
-    }
+    
 
     public void creeazaComanda(ArrayList<Restaurant> restaurante, Scanner scanner) {
         while (true) {
