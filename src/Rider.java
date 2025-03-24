@@ -46,5 +46,9 @@ public class Rider extends Persoana {
         return idRider;
     }
 
+    public void livreazaComanda(Comanda comanda) {
+        comanda.setStatusComanda(StatusComanda.LIVRATA);
+    }
+
 
 }

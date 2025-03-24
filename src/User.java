@@ -58,7 +58,7 @@ public class User extends Persoana {
     public void adaugaVoucher(Voucher voucher) {
         this.vouchere.add(voucher);
     }
-    
+
 
     public void creeazaComanda(ArrayList<Restaurant> restaurante, Scanner scanner) {
         while (true) {
@@ -148,6 +148,11 @@ public class User extends Persoana {
                 }
             }
         }
+    }
+
+    public void anuleazaComanda(Comanda comanda) {
+        comanda.setStatusComanda(StatusComanda.ANULATA);
+        comenzi.remove(comanda);
     }
 
 
