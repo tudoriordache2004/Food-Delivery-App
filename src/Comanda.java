@@ -98,9 +98,8 @@ public class Comanda {
 
     @Override
     public String toString() {
-        return idComanda + ". User: " + (user != null ? user.getId() : "N/A") +
-                ", Restaurant: " + (restaurant != null ? restaurant.getIdRestaurant() : "N/A") +
-                ", Produse: " + listaProduse.toString() +
+        return "Restaurant: " + (restaurant != null ? restaurant.getNume() : "N/A") + '\n' +
+                "Produse: " + listaProduse.toString() +
                 ", Status: " + (comandaLivrata ? " livrata" : " nelivrata") +
                 ", Data: " + dataComenzii;
     }

@@ -74,8 +74,7 @@ public class Produs {
 
     @Override
     public String toString() {
-        return "ID: " + idProdus +
-                ", Produs: " + numeProdus +
+        return idProdus + ". " + numeProdus +
                 ", Descriere: " + descriere +
                 ", Pret: " + pret + " RON";
     }
