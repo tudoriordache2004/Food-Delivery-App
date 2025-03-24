@@ -155,6 +155,11 @@ public class User extends Persoana {
         comenzi.remove(comanda);
     }
 
+    public void adaugaRecenzie(Restaurant restaurant, int rating, String text) {
+        Recenzie recenzie = new Recenzie(this, restaurant, rating, text);
+        restaurant.adaugaRecenzie(recenzie);
+    }
+
 
 }
 

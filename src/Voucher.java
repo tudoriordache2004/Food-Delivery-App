@@ -48,6 +48,9 @@ public class Voucher {
     }
 
     public void setValoareReducere(double valoareReducere) {
+        if (valoareReducere < 0) {
+            throw new IllegalArgumentException("Valoarea reducerii nu poate fi negativa.");
+        }
         this.valoareReducere = valoareReducere;
     }
 

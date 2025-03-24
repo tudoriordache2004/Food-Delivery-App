@@ -60,6 +60,9 @@ public abstract class Persoana {
     }
 
     public void setVarsta(int varsta) {
+        if (varsta < 0) {
+            throw new IllegalArgumentException("Varsta nu poate fi negativa.");
+        }
         this.varsta = varsta;
     }
 

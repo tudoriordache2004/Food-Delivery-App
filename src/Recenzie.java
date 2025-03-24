@@ -27,7 +27,7 @@ public class Recenzie {
     }
 
     // Constructor parametrizat
-    public Recenzie(int rating, String comentariu, User user, Restaurant restaurant) {
+    public Recenzie(User user, Restaurant restaurant, int rating, String comentariu) {
         this.rating = rating;
         this.comentariu = comentariu;
         this.user = user;

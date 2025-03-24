@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Restaurant {
@@ -8,7 +7,8 @@ public class Restaurant {
     private String adresa;
     private String tipMancare;
     private ArrayList<Produs> meniu;
-    private double rating;
+    private ArrayList<Recenzie> recenzii;
+    private double medieRating;
 
     // Bloc static
     static {
@@ -25,8 +25,9 @@ public class Restaurant {
         this.nume = "";
         this.adresa = "";
         this.tipMancare = "";
-        this.meniu = new ArrayList<Produs>();
-        this.rating = 0.00;
+        this.meniu = new ArrayList<>();
+        this.recenzii = new ArrayList<>();
+        this.medieRating = 0.00;
     }
 
     // Constructor parametrizat
@@ -34,8 +35,9 @@ public class Restaurant {
         this.nume = nume;
         this.adresa = adresa;
         this.tipMancare = tipMancare;
+        this.recenzii = new ArrayList<>();
         this.meniu = new ArrayList<>();
-        this.rating = 0.00;
+        this.medieRating = 0.00;
     }
 
     // Constructor de copiere
@@ -43,10 +45,10 @@ public class Restaurant {
         this.nume = other.nume;
         this.adresa = other.adresa;
         this.tipMancare = other.tipMancare;
-
+        this.recenzii = new ArrayList<>(other.recenzii);
         this.meniu = new ArrayList<Produs>();
         this.meniu.addAll(other.meniu);
-        this.rating = other.rating;
+        this.medieRating = other.medieRating;
     }
 
     // Getteri
@@ -54,8 +56,8 @@ public class Restaurant {
         return nume;
     }
 
-    public double getRating() {
-        return rating;
+    public double getMedieRating() {
+        return medieRating;
     }
 
     public String getAdresa() {
@@ -91,11 +93,12 @@ public class Restaurant {
     public void setTipMancare(String tipMancare) {
         this.tipMancare = tipMancare;
     }
+    
 
     // Alte metode
     @Override
     public String toString() {
-        return idRestaurant + ". " + nume + " - " + adresa + ", tip mancare: " + tipMancare + ". Rating: " + rating;
+        return idRestaurant + ". " + nume + " - " + adresa + ", tip mancare: " + tipMancare + ". Rating: " + medieRating;
     }
 
     public void afiseazaMeniu() {
@@ -117,10 +120,15 @@ public class Restaurant {
         comanda.setStatusComanda(StatusComanda.IN_PREPARARE);
     }
 
-    public void trimiteComanda(Comanda comanda) {
+    public void trimiteComanda(Comanda comanda, Rider rider) {
         comanda.setStatusComanda(StatusComanda.IN_LIVRARE);
+        rider.adaugaComanda(comanda);
     }
 
+    public void adaugaRecenzie(Recenzie recenzie) {
+        recenzii.add(recenzie);
+
+    }
 
 }
 
