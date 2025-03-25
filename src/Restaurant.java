@@ -93,7 +93,7 @@ public class Restaurant {
     public void setTipMancare(String tipMancare) {
         this.tipMancare = tipMancare;
     }
-    
+
 
     // Alte metode
     @Override
@@ -120,14 +120,14 @@ public class Restaurant {
         comanda.setStatusComanda(StatusComanda.IN_PREPARARE);
     }
 
-    public void trimiteComanda(Comanda comanda, Rider rider) {
+    public void trimiteComanda(Comanda comanda, ArrayList<Rider> rideri) {
         comanda.setStatusComanda(StatusComanda.IN_LIVRARE);
-        rider.adaugaComanda(comanda);
+        int index = (int) (Math.random() * rideri.size());
+        rideri.get(index).adaugaComanda(comanda);
     }
 
     public void adaugaRecenzie(Recenzie recenzie) {
         recenzii.add(recenzie);
-
     }
 
 }

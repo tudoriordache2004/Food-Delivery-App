@@ -50,6 +50,7 @@ public class Rider extends Persoana {
         livrari.add(comanda);
     }
 
+
     public void livreazaComanda(Comanda comanda) {
         comanda.setStatusComanda(StatusComanda.LIVRATA);
     }

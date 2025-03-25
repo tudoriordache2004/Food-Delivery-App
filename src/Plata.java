@@ -3,7 +3,6 @@ public class Plata {
     private int idPlata;
     private double sumaDePlata;
     private String metodaPlata;
-    private String statusPlata;
 
     // Bloc static pentru inițializarea numărului de plăți
     static {
@@ -19,21 +18,18 @@ public class Plata {
     public Plata() {
         this.sumaDePlata = 0.0;
         this.metodaPlata = "Necunoscut";
-        this.statusPlata = "Neprocesata";
     }
 
     // Constructor cu parametri
     public Plata(double sumaDePlata, String metodaPlata, String statusPlata) {
         this.sumaDePlata = sumaDePlata;
         this.metodaPlata = metodaPlata;
-        this.statusPlata = statusPlata;
     }
 
     // Constructor de copiere
     public Plata(Plata other) {
         this.sumaDePlata = other.sumaDePlata;
         this.metodaPlata = other.metodaPlata;
-        this.statusPlata = other.statusPlata;
     }
 
     // Getteri
@@ -49,9 +45,6 @@ public class Plata {
         return metodaPlata;
     }
 
-    public String getStatusPlata() {
-        return statusPlata;
-    }
 
     public static int getNrPlati() {
         return nrPlati;
@@ -66,7 +59,4 @@ public class Plata {
         this.metodaPlata = metodaPlata;
     }
 
-    public void setStatusPlata(String statusPlata) {
-        this.statusPlata = statusPlata;
-    }
 }
