@@ -121,16 +121,13 @@ public class Comanda {
             costTotal += produs.getPret();
         }
         if (voucher != null) {
-            costTotal -= voucher.getValoareReducere();
-        }
-        if (costTotal <= 0) {
-            return 0;
+            return Math.max(costTotal - voucher.getValoareReducere(), 0);
         }
         return costTotal;
     }
 
     public void aplicaVoucher(Voucher voucher) {
-        if (voucher != null && voucher.getDataExpirare().isAfter(LocalDate.now())) {
+        if (voucher.esteValid()) {
             this.voucher = voucher;
         } else {
             System.out.println("Voucher invalid sau expirat.");

@@ -1,27 +1,15 @@
 public class Plata {
-    private static int nrPlati;
-    private int idPlata;
     private double sumaDePlata;
-    private String metodaPlata;
-
-    // Bloc static pentru inițializarea numărului de plăți
-    static {
-        nrPlati = 0;
-    }
-
-    // Bloc nestatic pentru generarea ID-ului plății
-    {
-        this.idPlata = ++nrPlati;
-    }
+    private MetodaPlata metodaPlata;
 
     // Constructor fără parametri
     public Plata() {
         this.sumaDePlata = 0.0;
-        this.metodaPlata = "Necunoscut";
+        this.metodaPlata = null;
     }
 
     // Constructor cu parametri
-    public Plata(double sumaDePlata, String metodaPlata, String statusPlata) {
+    public Plata(double sumaDePlata, MetodaPlata metodaPlata) {
         this.sumaDePlata = sumaDePlata;
         this.metodaPlata = metodaPlata;
     }
@@ -33,21 +21,12 @@ public class Plata {
     }
 
     // Getteri
-    public int getIdPlata() {
-        return idPlata;
-    }
-
     public double getSumaDePlata() {
         return sumaDePlata;
     }
 
-    public String getMetodaPlata() {
+    public MetodaPlata getMetodaPlata() {
         return metodaPlata;
-    }
-
-
-    public static int getNrPlati() {
-        return nrPlati;
     }
 
     // Setteri
@@ -55,8 +34,9 @@ public class Plata {
         this.sumaDePlata = sumaDePlata;
     }
 
-    public void setMetodaPlata(String metodaPlata) {
+    public void setMetodaPlata(MetodaPlata metodaPlata) {
         this.metodaPlata = metodaPlata;
     }
+
 
 }

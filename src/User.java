@@ -151,8 +151,12 @@ public class User extends Persoana {
     }
 
     public void anuleazaComanda(Comanda comanda) {
-        comanda.setStatusComanda(StatusComanda.ANULATA);
-        comenzi.remove(comanda);
+        if (comanda.getStatus() == StatusComanda.IN_ASTEPTARE || comanda.getStatus() == StatusComanda.PRELUATA) {
+            comanda.setStatusComanda(StatusComanda.ANULATA);
+            comenzi.remove(comanda);
+        } else {
+            System.out.println("Comanda dumneavoastra nu mai poate fi anulata");
+        }
     }
 
     public void adaugaRecenzie(Restaurant restaurant, int rating, String text) {

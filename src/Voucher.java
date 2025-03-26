@@ -58,6 +58,10 @@ public class Voucher {
         this.dataExpirare = dataExpirare;
     }
 
+    public boolean esteValid() {
+        return LocalDate.now().isBefore(dataExpirare);
+    }
+
     @Override
     public String toString() {
         return "Voucher " + codVoucher +
