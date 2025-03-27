@@ -164,6 +164,16 @@ public class User extends Persoana {
         restaurant.adaugaRecenzie(recenzie);
     }
 
+    public ArrayList<Comanda> comenziActive() {
+        ArrayList<Comanda> active = new ArrayList<>();
+        for (Comanda comanda : comenzi) {
+            if (comanda.getStatus() != StatusComanda.LIVRATA && comanda.getStatus() != StatusComanda.ANULATA) {
+                active.add(comanda);
+            }
+        }
+        return active;
+    }
+
 
 }
 

@@ -69,6 +69,9 @@ public class Recenzie {
 
     // Setteri
     public void setRating(int rating) {
+        if (rating < 1 || rating > 5) {
+            throw new IllegalArgumentException("Ratingul trebuie să fie între 1 și 5.");
+        }
         this.rating = rating;
     }
 

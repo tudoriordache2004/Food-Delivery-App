@@ -4,7 +4,14 @@ import java.util.Scanner;
 
 public class UserInterface {
 
-    public void initializareRestaurante() {
+    public void afiseazaMeniuPrincipal() {
+        System.out.println("Bine ai venit!");
+        System.out.println("1. Creare comanda");
+        System.out.println("2. Vizualizare comenzi active");
+        System.out.println("3. Iesire");
+    }
+
+    public void initializare() {
         Restaurant restaurant1 = new Restaurant("Pizzeria Napoli", "Strada Florilor 12", "Italiana");
         Restaurant restaurant2 = new Restaurant("Sushi Bar", "Bd. Unirii 20", "Japoneza");
 
@@ -30,10 +37,24 @@ public class UserInterface {
         Voucher voucher1 = new Voucher("X123F5G", 25, LocalDate.of(2025, 10, 30));
         user1.adaugaVoucher(voucher1);
 
+
         // Testare metoda creeazaComanda
         Scanner scanner = new Scanner(System.in);
-        user1.creeazaComanda(restaurante, scanner);
-
-        scanner.close();
+        while (true) {
+            afiseazaMeniuPrincipal();
+            int optiune = scanner.nextInt();
+            switch (optiune) {
+                case 1:
+                    user1.creeazaComanda(restaurante, scanner);
+                case 2:
+                    user1.comenziActive();
+                case 3:
+                    System.out.println("La revedere!");
+                    return;
+                default:
+                    System.out.println("Optiune invalida.");
+            }
+            user1.creeazaComanda(restaurante, scanner);
+        }
     }
 }

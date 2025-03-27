@@ -5,6 +5,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         UserInterface interfata = new UserInterface();
-        interfata.initializareRestaurante();
+        interfata.initializare();
     }
 }
