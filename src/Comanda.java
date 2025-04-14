@@ -101,20 +101,12 @@ public class Comanda {
 
     @Override
     public String toString() {
-        return "Comanda{" +
-                "idComanda=" + idComanda +
-                ", user=" + user +
-                ", restaurant=" + restaurant +
-                ", voucher=" + voucher +
-                ", listaProduse=" + listaProduse +
-                ", dataComenzii='" + dataComenzii + '\'' +
-                ", status=" + status +
-                '}';
+        return  restaurant +
+                ", listaProduse=" + listaProduse + '\n' +
+                "dataComenzii='" + dataComenzii + '\'' +
+                ", status=" + status;
     }
 
-    public void afiseazaDetalii() {
-        System.out.println(this);
-    }
 
     public void adaugaProdus(Produs produs) {
         listaProduse.add(produs);

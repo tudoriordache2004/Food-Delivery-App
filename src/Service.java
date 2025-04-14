@@ -19,44 +19,44 @@ public class Service {
 
         Produs produs1 = new Produs("Pizza Margherita", "Pizza cu mozzarella si rosii", 30);
         Produs produs2 = new Produs("Burger Classic", "Burger cu vita si cartofi", 25);
-        Produs produs3 = new Produs("Sushi Set", "Sushi variat", 50);
-        Produs produs4 = new Produs("Supa de ceapa gratinata", "Supa de ceapa cu crutoane si branza", 18);
-        Produs produs5 = new Produs("Confit de rata", "Rata confiata cu cartofi sotati", 45);
-        Produs produs6 = new Produs("Creme brulee", "Desert clasic cu vanilie si caramel crocant", 15);
-        Produs produs7 = new Produs("Salata greceasca", "Salata cu rosii, castraveti, masline si feta", 22);
-        Produs produs8 = new Produs("Souvlaki de pui", "Frigarui de pui marinate, servite cu tzatziki", 35);
-        Produs produs9 = new Produs("Baklava", "Desert dulce cu nuci si miere", 16);
-        Produs produs10 = new Produs("Ciorba de burta", "Supa acra de burta de vita", 20);
-        Produs produs11 = new Produs("Mici", "Carnati mici din carne tocata, la gratar (4 buc)", 18);
-        Produs produs12 = new Produs("Papanasi", "Gogosi cu branza dulce, smantana si dulceata", 17);
-        Produs produs13 = new Produs("Tacos cu carne", "Trei tacos cu carne de vita sau pui, salsa si guacamole", 28);
-        Produs produs14 = new Produs("Quesadilla cu branza", "Tortilla umpluta cu branza si legume", 24);
-        Produs produs15 = new Produs("Churros cu ciocolata", "Patiserie prajita cu zahar si sos de ciocolata", 14);
-        Produs produs16 = new Produs("Paste Carbonara", "Paste cu ou, bacon si parmezan", 35);
-        Produs produs17 = new Produs("Sashimi Mix", "Selectie de sashimi proaspat", 60);
+        Produs produs3 = new Produs("Paste Carbonara", "Paste cu ou, bacon si parmezan", 35);
+        Produs produs4 = new Produs("Sushi Set", "Sushi variat", 50);
+        Produs produs5 = new Produs("Sashimi Mix", "Selectie de sashimi proaspat", 60);
+        Produs produs6 = new Produs("Supa de ceapa gratinata", "Supa de ceapa cu crutoane si branza", 18);
+        Produs produs7 = new Produs("Confit de rata", "Rata confiata cu cartofi sotati", 45);
+        Produs produs8 = new Produs("Creme brulee", "Desert clasic cu vanilie si caramel crocant", 15);
+        Produs produs9 = new Produs("Salata greceasca", "Salata cu rosii, castraveti, masline si feta", 22);
+        Produs produs10 = new Produs("Souvlaki de pui", "Frigarui de pui marinate, servite cu tzatziki", 35);
+        Produs produs11 = new Produs("Baklava", "Desert dulce cu nuci si miere", 16);
+        Produs produs12 = new Produs("Ciorba de burta", "Supa acra de burta de vita", 20);
+        Produs produs13 = new Produs("Mici", "Carnati mici din carne tocata, la gratar (4 buc)", 18);
+        Produs produs14 = new Produs("Papanasi", "Gogosi cu branza dulce, smantana si dulceata", 17);
+        Produs produs15 = new Produs("Tacos cu carne", "Trei tacos cu carne de vita sau pui, salsa si guacamole", 28);
+        Produs produs16 = new Produs("Quesadilla cu branza", "Tortilla umpluta cu branza si legume", 24);
+        Produs produs17 = new Produs("Churros cu ciocolata", "Patiserie prajita cu zahar si sos de ciocolata", 14);
 
         restaurant1.adaugaProdusInMeniu(produs1);
         restaurant1.adaugaProdusInMeniu(produs2);
-        restaurant1.adaugaProdusInMeniu(produs16);
+        restaurant1.adaugaProdusInMeniu(produs3);
 
-        restaurant2.adaugaProdusInMeniu(produs3);
-        restaurant2.adaugaProdusInMeniu(produs17);
+        restaurant2.adaugaProdusInMeniu(produs4);
+        restaurant2.adaugaProdusInMeniu(produs5);
 
-        restaurant3.adaugaProdusInMeniu(produs4);
-        restaurant3.adaugaProdusInMeniu(produs5);
         restaurant3.adaugaProdusInMeniu(produs6);
+        restaurant3.adaugaProdusInMeniu(produs7);
+        restaurant3.adaugaProdusInMeniu(produs8);
 
-        restaurant4.adaugaProdusInMeniu(produs7);
-        restaurant4.adaugaProdusInMeniu(produs8);
         restaurant4.adaugaProdusInMeniu(produs9);
+        restaurant4.adaugaProdusInMeniu(produs10);
+        restaurant4.adaugaProdusInMeniu(produs11);
 
-        restaurant5.adaugaProdusInMeniu(produs10);
-        restaurant5.adaugaProdusInMeniu(produs11);
         restaurant5.adaugaProdusInMeniu(produs12);
+        restaurant5.adaugaProdusInMeniu(produs13);
+        restaurant5.adaugaProdusInMeniu(produs14);
 
-        restaurant6.adaugaProdusInMeniu(produs13);
-        restaurant6.adaugaProdusInMeniu(produs14);
         restaurant6.adaugaProdusInMeniu(produs15);
+        restaurant6.adaugaProdusInMeniu(produs16);
+        restaurant6.adaugaProdusInMeniu(produs17);
 
         ArrayList<Restaurant> restaurante = new ArrayList<>();
         restaurante.add(restaurant1);
@@ -80,15 +80,7 @@ public class Service {
         user1.adaugaVoucher(voucher1);
         user1.adaugaVoucher(voucher2);
 
-        Set<Rider> riders = new HashSet<>();
-
-        Rider rider1 = new Rider("Al Shabab", "Makun", "Bucuresti", 39, "makunals@gmail.com");
-        Rider rider2 = new Rider("Ahmed", "Khan", "Bucuresti", 31, "ahmed.khan@gmail.com");
-        Rider rider3 = new Rider("Bilal", "Hussain", "Bucuresti", 29, "bilal.hussain@gmail.com");
-        Rider rider4 = new Rider("Zubair", "Malik", "Bucuresti", 33, "zubair.malik@gmail.com");
-        Rider rider5 = new Rider("Sajid", "Ali", "Bucuresti", 27, "sajid.ali@gmail.com");
-        Rider rider6 = new Rider("Imran", "Qureshi", "Bucuresti", 35, "imran.qureshi@gmail.com");
-
+        ArrayList<Rider> riders = initializeRiders();
 
         System.out.println("Bine ai venit!");
         
@@ -99,7 +91,7 @@ public class Service {
                 int optiune = scanner.nextInt();
                 switch (optiune) {
                     case 1:
-                        creeazaComanda(user1, restaurante, scanner);
+                        creeazaComanda(user1, restaurante, riders, scanner);
                         break;
                     case 2:
                         user1.comenziActive();
@@ -118,7 +110,26 @@ public class Service {
         }
     }
 
-    public void creeazaComanda(User user, ArrayList<Restaurant> restaurante, Scanner scanner) throws InterruptedException, InputMismatchException {
+    private static ArrayList<Rider> initializeRiders() {
+        ArrayList<Rider> riders = new ArrayList<>();
+
+        Rider rider1 = new Rider("Al Shabab", "Makun", "Bucuresti", 39, "makunals@gmail.com");
+        Rider rider2 = new Rider("Ahmed", "Khan", "Bucuresti", 31, "ahmed.khan@gmail.com");
+        Rider rider3 = new Rider("Bilal", "Hussain", "Bucuresti", 29, "bilal.hussain@gmail.com");
+        Rider rider4 = new Rider("Zubair", "Malik", "Bucuresti", 33, "zubair.malik@gmail.com");
+        Rider rider5 = new Rider("Sajid", "Ali", "Bucuresti", 27, "sajid.ali@gmail.com");
+        Rider rider6 = new Rider("Imran", "Qureshi", "Bucuresti", 35, "imran.qureshi@gmail.com");
+
+        riders.add(rider1);
+        riders.add(rider2);
+        riders.add(rider3);
+        riders.add(rider4);
+        riders.add(rider5);
+        riders.add(rider6);
+        return riders;
+    }
+
+    public void creeazaComanda(User user, ArrayList<Restaurant> restaurante, ArrayList<Rider> riders, Scanner scanner) throws InterruptedException, InputMismatchException {
         while (true) {
             System.out.println("Selectati restaurantul dorit. In caz de anulare, selectati 0:");
 
@@ -294,9 +305,14 @@ public class Service {
             comanda.setStatusComanda(StatusComanda.IN_PREPARARE);
             Thread.sleep(2000);
             System.out.println("Comanda dumneavoastra este in livrare.");
-            comanda.setStatusComanda(StatusComanda.IN_LIVRARE);
+            int randomRider = (int)(Math.random() * riders.size());
+            Rider riderComanda = riders.get(randomRider);
+            riderComanda.adaugaComanda(comanda);
+            System.out.println("Livrator: " + riderComanda);
             Thread.sleep(2000);
+            comanda.setStatusComanda(StatusComanda.IN_LIVRARE);
             System.out.println("Comanda dumneavoastra a fost livrata.");
+            riderComanda.livreazaComanda(comanda);
             comanda.setStatusComanda(StatusComanda.LIVRATA);
 
             boolean recenzieFinalizata = false;
@@ -340,6 +356,7 @@ public class Service {
 
                             user.adaugaRecenzie(alegereRestaurant, rating, text);
                             System.out.println("Recenzia a fost adaugata cu succes!");
+                            alegereRestaurant.actualizeazaMedieRating();
                             recenzieFinalizata = true;
                             break;
                         }

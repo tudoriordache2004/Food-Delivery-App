@@ -130,7 +130,7 @@ public class Restaurant {
         recenzii.add(recenzie);
     }
 
-    public void calculeazaMedieRating() {
+    public void actualizeazaMedieRating() {
         if (recenzii.isEmpty()) {
             medieRating = 0.0;
         } else {
@@ -138,7 +138,7 @@ public class Restaurant {
             for (Recenzie recenzie : recenzii) {
                 suma += recenzie.getRating();
             }
-            medieRating = suma / recenzii.size();
+            this.medieRating = suma / recenzii.size();
         }
     }
 

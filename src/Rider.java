@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Rider extends Persoana {
+public class Rider extends Persoana implements Comparable{
     private static int nrRideri;
     private int idRider;
     private ArrayList<Comanda> livrari;
@@ -54,5 +54,15 @@ public class Rider extends Persoana {
         comanda.setStatusComanda(StatusComanda.LIVRATA);
     }
 
+    public int compareTo(Object obj) {
+        Rider other = (Rider)obj;
+        if(varsta < other.varsta) return -1;
+        if(varsta > other.varsta) return 1;
+        return 0;
+    }
 
+    @Override
+    public String toString() {
+        return nume + " " + prenume;
+    }
 }
