@@ -1,11 +1,13 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Service {
 
-    public void creeazaComanda(User user, ArrayList<Restaurant> restaurante, Scanner scanner) throws InterruptedException {
+
+    public void creeazaComanda(User user, ArrayList<Restaurant> restaurante, Scanner scanner) throws InterruptedException, InputMismatchException {
         while (true) {
             System.out.println("Selectati restaurantul dorit. In caz de anulare, selectati 0:");
 
@@ -13,7 +15,17 @@ public class Service {
                 System.out.println(res.toString());
             }
 
-            int inputRestaurant = scanner.nextInt();
+            int inputRestaurant = -1;
+            while (true) {
+                try {
+                    inputRestaurant = scanner.nextInt();
+                    break;
+                } catch (InputMismatchException e) {
+                    System.out.println("Introduceti un numar valid.");
+                    scanner.nextLine();
+                }
+            }
+
             if (inputRestaurant == 0) return;
 
             Restaurant alegereRestaurant = null;
@@ -37,7 +49,17 @@ public class Service {
                 System.out.println("Alegeti produsele. In caz de anulare, selectati 0:");
                 alegereRestaurant.afiseazaMeniu();
 
-                int inputProdus = scanner.nextInt();
+                int inputProdus = -1;
+                while (true) {
+                    try {
+                        inputProdus = scanner.nextInt();
+                        break;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Introduceti un numar valid.");
+                        scanner.nextLine();
+                    }
+                }
+
                 if (inputProdus == 0) break;
 
                 Produs produsAles = null;
@@ -54,7 +76,16 @@ public class Service {
                 }
 
                 System.out.println("Introduceti cantitatea:");
-                int cantitate = scanner.nextInt();
+                int cantitate = -1;
+                while (true) {
+                    try {
+                        cantitate = scanner.nextInt();
+                        break;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Introduceti un numar valid.");
+                        scanner.nextLine();
+                    }
+                }
 
                 for (int i = 0; i < cantitate; i++) {
                     comanda.adaugaProdus(produsAles);
@@ -64,7 +95,16 @@ public class Service {
 
                 while (true) {
                     System.out.println("Doriti sa mai adaugati alte produse? \n1. DA \n2. NU, finalizeaza comanda");
-                    int inputAlteProduse = scanner.nextInt();
+                    int inputAlteProduse = -1;
+                    while (true) {
+                        try {
+                            inputAlteProduse = scanner.nextInt();
+                            break;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Introduceti un numar valid.");
+                            scanner.nextLine();
+                        }
+                    }
 
                     switch (inputAlteProduse) {
                         case 1:
@@ -81,7 +121,16 @@ public class Service {
 
             while (true) {
                 System.out.println("Doriti sa adaugati un voucher? \n1. DA \n2. NU");
-                int inputVoucher = scanner.nextInt();
+                int inputVoucher = -1;
+                while (true) {
+                    try {
+                        inputVoucher = scanner.nextInt();
+                        break;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Introduceti un numar valid.");
+                        scanner.nextLine();
+                    }
+                }
 
                 switch (inputVoucher) {
                     case 1:
@@ -93,7 +142,17 @@ public class Service {
                                 }
                             }
                             System.out.println("Selectati voucherul dorit (sau -1 pentru a nu aplica niciun voucher):");
-                            int voucherIndex = scanner.nextInt();
+                            int voucherIndex = -1;
+                            while (true) {
+                                try {
+                                    voucherIndex = scanner.nextInt();
+                                    break;
+                                } catch (InputMismatchException e) {
+                                    System.out.println("Introduceti un numar valid.");
+                                    scanner.nextLine();
+                                }
+                            }
+
                             if (voucherIndex >= 1 && voucherIndex <= user.getVouchere().size()) {
                                 comanda.aplicaVoucher(user.getVouchere().get(voucherIndex - 1));
                                 System.out.println("Ati selectat " + user.getVouchere().get(voucherIndex - 1));
@@ -133,13 +192,31 @@ public class Service {
 
             while (!recenzieFinalizata) {
                 System.out.println("Doriti sa adaugati o recenzie?\n1. DA\n2. NU");
-                int inputRecenzie = scanner.nextInt();
+                int inputRecenzie = -1;
+                while (true) {
+                    try {
+                        inputRecenzie = scanner.nextInt();
+                        break;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Input invalid. Introduceti un numar valid.");
+                        scanner.nextLine();
+                    }
+                }
 
                 switch (inputRecenzie) {
                     case 1:
                         while (true) {
                             System.out.println("Adaugati rating-ul: ");
-                            int rating = scanner.nextInt();
+                            int rating = -1;
+                            while (true) {
+                                try {
+                                    rating = scanner.nextInt();
+                                    break;
+                                } catch (InputMismatchException e) {
+                                    System.out.println("Input invalid. Introduceti un numar valid.");
+                                    scanner.nextLine();
+                                }
+                            }
 
                             if (rating < 1 || rating > 5) {
                                 System.out.println("Rating invalid. Introduceti un numar intre 1 si 5.");
@@ -177,7 +254,6 @@ public class Service {
         Restaurant restaurant1 = new Restaurant("Pizzeria Napoli", "Strada Florilor 12", "Italiana");
         Restaurant restaurant2 = new Restaurant("Sushi Bar", "Bd. Unirii 20", "Japoneza");
 
-        // Creare produse
         Produs produs1 = new Produs("Pizza Margherita", "Pizza cu mozzarella si rosii", 30);
         Produs produs2 = new Produs("Burger Classic", "Burger cu vita si cartofi", 25);
         Produs produs3 = new Produs("Sushi Set", "Sushi variat", 50);
@@ -187,43 +263,44 @@ public class Service {
 
         restaurant2.adaugaProdusInMeniu(produs3);
 
-        // Lista restaurante
         ArrayList<Restaurant> restaurante = new ArrayList<>();
         restaurante.add(restaurant1);
         restaurante.add(restaurant2);
         return restaurante;
     }
 
-    public void initializare() throws InterruptedException {
+    public void initializare() throws InterruptedException, InputMismatchException {
         ArrayList<Restaurant> restaurante = initializeRestaurants();
 
-        // Creare utilizator
         User user1 = new User("Popescu", "Ion", "Bucuresti", 25, "ion.popescu@email.com");
 
-        // Creare voucher
         Voucher voucher1 = new Voucher("X123F5G", 25, LocalDate.of(2025, 10, 30));
         user1.adaugaVoucher(voucher1);
 
         System.out.println("Bine ai venit!");
         
-        // Testare metoda creeazaComanda
         Scanner scanner = new Scanner(System.in);
         while (true) {
             afiseazaMeniuPrincipal();
-            int optiune = scanner.nextInt();
-            switch (optiune) {
-                case 1:
-                    creeazaComanda(user1, restaurante, scanner);
-                    break;
-                case 2:
-                    user1.comenziActive();
-                    break;
-                case 3:
-                    System.out.println("La revedere!");
-                    return;
-                default:
-                    System.out.println("Optiune invalida.");
-                    break;
+            try {
+                int optiune = scanner.nextInt();
+                switch (optiune) {
+                    case 1:
+                        creeazaComanda(user1, restaurante, scanner);
+                        break;
+                    case 2:
+                        user1.comenziActive();
+                        break;
+                    case 3:
+                        System.out.println("La revedere!");
+                        return;
+                    default:
+                        System.out.println("Optiune invalida.");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Introduceti un numar valid.");
+                scanner.nextLine();
             }
         }
     }
