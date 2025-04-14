@@ -1,11 +1,122 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 public class Service {
 
+    public void afiseazaMeniuPrincipal() {
+        System.out.println("1. Creare comanda");
+        System.out.println("2. Vizualizare comenzi active");
+        System.out.println("3. Iesire");
+    }
+
+    private static ArrayList<Restaurant> initializeRestaurants() {
+        Restaurant restaurant1 = new Restaurant("Pizzeria Napoli", "Strada Florilor 12", "Italiana");
+        Restaurant restaurant2 = new Restaurant("Sushi Bar", "Bd. Unirii 20", "Japoneza");
+        Restaurant restaurant3 = new Restaurant("Bistro Francez", "Calea Victoriei 155", "Franceza");
+        Restaurant restaurant4 = new Restaurant("Taverna Greceasca", "Strada Lipscani 30", "Greaca");
+        Restaurant restaurant5 = new Restaurant("Casa Romaneasca", "Soseaua Kiseleff 5", "Romaneasca");
+        Restaurant restaurant6 = new Restaurant("Mexican Grill", "Bulevardul Magheru 42", "Mexicana");
+
+        Produs produs1 = new Produs("Pizza Margherita", "Pizza cu mozzarella si rosii", 30);
+        Produs produs2 = new Produs("Burger Classic", "Burger cu vita si cartofi", 25);
+        Produs produs3 = new Produs("Sushi Set", "Sushi variat", 50);
+        Produs produs4 = new Produs("Supa de ceapa gratinata", "Supa de ceapa cu crutoane si branza", 18);
+        Produs produs5 = new Produs("Confit de rata", "Rata confiata cu cartofi sotati", 45);
+        Produs produs6 = new Produs("Creme brulee", "Desert clasic cu vanilie si caramel crocant", 15);
+        Produs produs7 = new Produs("Salata greceasca", "Salata cu rosii, castraveti, masline si feta", 22);
+        Produs produs8 = new Produs("Souvlaki de pui", "Frigarui de pui marinate, servite cu tzatziki", 35);
+        Produs produs9 = new Produs("Baklava", "Desert dulce cu nuci si miere", 16);
+        Produs produs10 = new Produs("Ciorba de burta", "Supa acra de burta de vita", 20);
+        Produs produs11 = new Produs("Mici", "Carnati mici din carne tocata, la gratar (4 buc)", 18);
+        Produs produs12 = new Produs("Papanasi", "Gogosi cu branza dulce, smantana si dulceata", 17);
+        Produs produs13 = new Produs("Tacos cu carne", "Trei tacos cu carne de vita sau pui, salsa si guacamole", 28);
+        Produs produs14 = new Produs("Quesadilla cu branza", "Tortilla umpluta cu branza si legume", 24);
+        Produs produs15 = new Produs("Churros cu ciocolata", "Patiserie prajita cu zahar si sos de ciocolata", 14);
+        Produs produs16 = new Produs("Paste Carbonara", "Paste cu ou, bacon si parmezan", 35);
+        Produs produs17 = new Produs("Sashimi Mix", "Selectie de sashimi proaspat", 60);
+
+        restaurant1.adaugaProdusInMeniu(produs1);
+        restaurant1.adaugaProdusInMeniu(produs2);
+        restaurant1.adaugaProdusInMeniu(produs16);
+
+        restaurant2.adaugaProdusInMeniu(produs3);
+        restaurant2.adaugaProdusInMeniu(produs17);
+
+        restaurant3.adaugaProdusInMeniu(produs4);
+        restaurant3.adaugaProdusInMeniu(produs5);
+        restaurant3.adaugaProdusInMeniu(produs6);
+
+        restaurant4.adaugaProdusInMeniu(produs7);
+        restaurant4.adaugaProdusInMeniu(produs8);
+        restaurant4.adaugaProdusInMeniu(produs9);
+
+        restaurant5.adaugaProdusInMeniu(produs10);
+        restaurant5.adaugaProdusInMeniu(produs11);
+        restaurant5.adaugaProdusInMeniu(produs12);
+
+        restaurant6.adaugaProdusInMeniu(produs13);
+        restaurant6.adaugaProdusInMeniu(produs14);
+        restaurant6.adaugaProdusInMeniu(produs15);
+
+        ArrayList<Restaurant> restaurante = new ArrayList<>();
+        restaurante.add(restaurant1);
+        restaurante.add(restaurant2);
+        restaurante.add(restaurant3);
+        restaurante.add(restaurant4);
+        restaurante.add(restaurant5);
+        restaurante.add(restaurant6);
+        return restaurante;
+    }
+
+    public void initializare() throws InterruptedException, InputMismatchException {
+        ArrayList<Restaurant> restaurante = initializeRestaurants();
+
+        User user1 = new User("Popescu", "Ion", "Bucuresti", 25, "ion.popescu@gmail.com");
+
+        Voucher voucher1 = new Voucher("X123F5G", 25, LocalDate.of(2025, 10, 30));
+        Voucher voucher2 = new Voucher("Y334FVG", 30, LocalDate.of(2025, 9, 22));
+
+
+        user1.adaugaVoucher(voucher1);
+        user1.adaugaVoucher(voucher2);
+
+        Set<Rider> riders = new HashSet<>();
+
+        Rider rider1 = new Rider("Al Shabab", "Makun", "Bucuresti", 39, "makunals@gmail.com");
+        Rider rider2 = new Rider("Ahmed", "Khan", "Bucuresti", 31, "ahmed.khan@gmail.com");
+        Rider rider3 = new Rider("Bilal", "Hussain", "Bucuresti", 29, "bilal.hussain@gmail.com");
+        Rider rider4 = new Rider("Zubair", "Malik", "Bucuresti", 33, "zubair.malik@gmail.com");
+        Rider rider5 = new Rider("Sajid", "Ali", "Bucuresti", 27, "sajid.ali@gmail.com");
+        Rider rider6 = new Rider("Imran", "Qureshi", "Bucuresti", 35, "imran.qureshi@gmail.com");
+
+
+        System.out.println("Bine ai venit!");
+        
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            afiseazaMeniuPrincipal();
+            try {
+                int optiune = scanner.nextInt();
+                switch (optiune) {
+                    case 1:
+                        creeazaComanda(user1, restaurante, scanner);
+                        break;
+                    case 2:
+                        user1.comenziActive();
+                        break;
+                    case 3:
+                        System.out.println("La revedere!");
+                        return;
+                    default:
+                        System.out.println("Optiune invalida.");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Introduceti un numar valid.");
+                scanner.nextLine();
+            }
+        }
+    }
 
     public void creeazaComanda(User user, ArrayList<Restaurant> restaurante, Scanner scanner) throws InterruptedException, InputMismatchException {
         while (true) {
@@ -239,68 +350,6 @@ public class Service {
                     default:
                         System.out.println("Optiune invalida.");
                 }
-            }
-        }
-    }
-
-
-    public void afiseazaMeniuPrincipal() {
-        System.out.println("1. Creare comanda");
-        System.out.println("2. Vizualizare comenzi active");
-        System.out.println("3. Iesire");
-    }
-
-    private static ArrayList<Restaurant> initializeRestaurants() {
-        Restaurant restaurant1 = new Restaurant("Pizzeria Napoli", "Strada Florilor 12", "Italiana");
-        Restaurant restaurant2 = new Restaurant("Sushi Bar", "Bd. Unirii 20", "Japoneza");
-
-        Produs produs1 = new Produs("Pizza Margherita", "Pizza cu mozzarella si rosii", 30);
-        Produs produs2 = new Produs("Burger Classic", "Burger cu vita si cartofi", 25);
-        Produs produs3 = new Produs("Sushi Set", "Sushi variat", 50);
-
-        restaurant1.adaugaProdusInMeniu(produs1);
-        restaurant1.adaugaProdusInMeniu(produs2);
-
-        restaurant2.adaugaProdusInMeniu(produs3);
-
-        ArrayList<Restaurant> restaurante = new ArrayList<>();
-        restaurante.add(restaurant1);
-        restaurante.add(restaurant2);
-        return restaurante;
-    }
-
-    public void initializare() throws InterruptedException, InputMismatchException {
-        ArrayList<Restaurant> restaurante = initializeRestaurants();
-
-        User user1 = new User("Popescu", "Ion", "Bucuresti", 25, "ion.popescu@email.com");
-
-        Voucher voucher1 = new Voucher("X123F5G", 25, LocalDate.of(2025, 10, 30));
-        user1.adaugaVoucher(voucher1);
-
-        System.out.println("Bine ai venit!");
-        
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            afiseazaMeniuPrincipal();
-            try {
-                int optiune = scanner.nextInt();
-                switch (optiune) {
-                    case 1:
-                        creeazaComanda(user1, restaurante, scanner);
-                        break;
-                    case 2:
-                        user1.comenziActive();
-                        break;
-                    case 3:
-                        System.out.println("La revedere!");
-                        return;
-                    default:
-                        System.out.println("Optiune invalida.");
-                        break;
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Introduceti un numar valid.");
-                scanner.nextLine();
             }
         }
     }

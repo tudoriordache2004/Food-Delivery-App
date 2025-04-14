@@ -54,13 +54,5 @@ public class Rider extends Persoana {
         comanda.setStatusComanda(StatusComanda.LIVRATA);
     }
 
-    public void afiseazaComenziLivrate() {
-        for (Comanda comanda : livrari) {
-            if (comanda.getStatus() == StatusComanda.LIVRATA) {
-                System.out.println(comanda);
-            }
-        }
-    }
-
 
 }
