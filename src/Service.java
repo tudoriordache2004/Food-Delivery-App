@@ -299,10 +299,10 @@ public class Service {
             System.out.println("Pret total: " + comanda.calculeazaCostTotal());
             Thread.sleep(2000);
             System.out.println("Comanda dumneavoastra a fost preluata.");
-            comanda.setStatusComanda(StatusComanda.PRELUATA);
+            alegereRestaurant.preiaComanda(comanda);
             Thread.sleep(2000);
             System.out.println("Comanda dumneavoastra este in preparare.");
-            comanda.setStatusComanda(StatusComanda.IN_PREPARARE);
+            alegereRestaurant.preparaComanda(comanda);
             Thread.sleep(2000);
             System.out.println("Comanda dumneavoastra este in livrare.");
             int randomRider = (int)(Math.random() * riders.size());
@@ -310,10 +310,8 @@ public class Service {
             riderComanda.adaugaComanda(comanda);
             System.out.println("Livrator: " + riderComanda);
             Thread.sleep(2000);
-            comanda.setStatusComanda(StatusComanda.IN_LIVRARE);
             System.out.println("Comanda dumneavoastra a fost livrata.");
             riderComanda.livreazaComanda(comanda);
-            comanda.setStatusComanda(StatusComanda.LIVRATA);
 
             boolean recenzieFinalizata = false;
 

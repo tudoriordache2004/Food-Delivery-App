@@ -64,6 +64,8 @@ public class User extends Persoana {
     }
 
     public void comenziActive() {
+        if (comenzi.isEmpty())
+            System.out.println("Nu aveti comenzi active.");
         for (Comanda comanda : comenzi) {
             System.out.println(comanda);
         }

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Restaurant {
     private static int nrRestaurante;
@@ -7,7 +8,7 @@ public class Restaurant {
     private String adresa;
     private String tipMancare;
     private ArrayList<Produs> meniu;
-    private ArrayList<Recenzie> recenzii;
+    private HashSet<Recenzie> recenzii;
     private double medieRating;
 
     // Bloc static
@@ -26,7 +27,7 @@ public class Restaurant {
         this.adresa = "";
         this.tipMancare = "";
         this.meniu = new ArrayList<>();
-        this.recenzii = new ArrayList<>();
+        this.recenzii = new HashSet<>();
         this.medieRating = 0.00;
     }
 
@@ -35,7 +36,7 @@ public class Restaurant {
         this.nume = nume;
         this.adresa = adresa;
         this.tipMancare = tipMancare;
-        this.recenzii = new ArrayList<>();
+        this.recenzii = new HashSet<>();
         this.meniu = new ArrayList<>();
         this.medieRating = 0.00;
     }
@@ -45,7 +46,7 @@ public class Restaurant {
         this.nume = other.nume;
         this.adresa = other.adresa;
         this.tipMancare = other.tipMancare;
-        this.recenzii = new ArrayList<>(other.recenzii);
+        this.recenzii = new HashSet<>(other.recenzii);
         this.meniu = new ArrayList<Produs>();
         this.meniu.addAll(other.meniu);
         this.medieRating = other.medieRating;
@@ -118,12 +119,6 @@ public class Restaurant {
 
     public void preparaComanda(Comanda comanda) {
         comanda.setStatusComanda(StatusComanda.IN_PREPARARE);
-    }
-
-    public void trimiteComanda(Comanda comanda, ArrayList<Rider> rideri) {
-        comanda.setStatusComanda(StatusComanda.IN_LIVRARE);
-        int index = (int) (Math.random() * rideri.size());
-        rideri.get(index).adaugaComanda(comanda);
     }
 
     public void adaugaRecenzie(Recenzie recenzie) {

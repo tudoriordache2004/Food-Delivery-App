@@ -1,4 +1,3 @@
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Recenzie {
     private static int nrRecenzii;
@@ -87,5 +86,12 @@ public class Recenzie {
         this.restaurant = restaurant;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Recenzie recenzie = (Recenzie) o;
+        return idRecenzie == recenzie.idRecenzie;
+    }
 
 }

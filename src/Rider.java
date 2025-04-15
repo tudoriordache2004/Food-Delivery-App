@@ -46,8 +46,10 @@ public class Rider extends Persoana implements Comparable{
         return idRider;
     }
 
-    public void adaugaComanda(Comanda comanda) {
+    public void adaugaComanda(Comanda comanda)
+    {
         livrari.add(comanda);
+        comanda.setStatusComanda(StatusComanda.IN_LIVRARE);
     }
 
     public void livreazaComanda(Comanda comanda) {
