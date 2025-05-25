@@ -17,24 +17,26 @@ public class Service {
         Restaurant restaurant5 = new Restaurant("Casa Romaneasca", "Soseaua Kiseleff 5", "Romaneasca");
         Restaurant restaurant6 = new Restaurant("Mexican Grill", "Bulevardul Magheru 42", "Mexicana");
 
-        Produs produs1 = new Produs("Pizza Margherita", "Pizza cu mozzarella si rosii", 30);
-        Produs produs2 = new Produs("Burger Classic", "Burger cu vita si cartofi", 25);
-        Produs produs3 = new Produs("Paste Carbonara", "Paste cu ou, bacon si parmezan", 35);
-        Produs produs4 = new Produs("Sushi Set", "Sushi variat", 50);
-        Produs produs5 = new Produs("Sashimi Mix", "Selectie de sashimi proaspat", 60);
-        Produs produs6 = new Produs("Supa de ceapa gratinata", "Supa de ceapa cu crutoane si branza", 18);
-        Produs produs7 = new Produs("Confit de rata", "Rata confiata cu cartofi sotati", 45);
-        Produs produs8 = new Produs("Creme brulee", "Desert clasic cu vanilie si caramel crocant", 15);
-        Produs produs9 = new Produs("Salata greceasca", "Salata cu rosii, castraveti, masline si feta", 22);
-        Produs produs10 = new Produs("Souvlaki de pui", "Frigarui de pui marinate, servite cu tzatziki", 35);
-        Produs produs11 = new Produs("Baklava", "Desert dulce cu nuci si miere", 16);
-        Produs produs12 = new Produs("Ciorba de burta", "Supa acra de burta de vita", 20);
-        Produs produs13 = new Produs("Mici", "Carnati mici din carne tocata, la gratar (4 buc)", 18);
-        Produs produs14 = new Produs("Papanasi", "Gogosi cu branza dulce, smantana si dulceata", 17);
-        Produs produs15 = new Produs("Tacos cu carne", "Trei tacos cu carne de vita sau pui, salsa si guacamole", 28);
-        Produs produs16 = new Produs("Quesadilla cu branza", "Tortilla umpluta cu branza si legume", 24);
-        Produs produs17 = new Produs("Churros cu ciocolata", "Patiserie prajita cu zahar si sos de ciocolata", 14);
+        // Initialize products with their respective restaurant IDs
+        Produs produs1 = new Produs("Pizza Margherita", "Pizza cu mozzarella si rosii", 30, restaurant1.getIdRestaurant());
+        Produs produs2 = new Produs("Burger Classic", "Burger cu vita si cartofi", 25, restaurant1.getIdRestaurant());
+        Produs produs3 = new Produs("Paste Carbonara", "Paste cu ou, bacon si parmezan", 35, restaurant1.getIdRestaurant());
+        Produs produs4 = new Produs("Sushi Set", "Sushi variat", 50, restaurant2.getIdRestaurant());
+        Produs produs5 = new Produs("Sashimi Mix", "Selectie de sashimi proaspat", 60, restaurant2.getIdRestaurant());
+        Produs produs6 = new Produs("Supa de ceapa gratinata", "Supa de ceapa cu crutoane si branza", 18, restaurant3.getIdRestaurant());
+        Produs produs7 = new Produs("Confit de rata", "Rata confiata cu cartofi sotati", 45, restaurant3.getIdRestaurant());
+        Produs produs8 = new Produs("Creme brulee", "Desert clasic cu vanilie si caramel crocant", 15, restaurant3.getIdRestaurant());
+        Produs produs9 = new Produs("Salata greceasca", "Salata cu rosii, castraveti, masline si feta", 22, restaurant4.getIdRestaurant());
+        Produs produs10 = new Produs("Souvlaki de pui", "Frigarui de pui marinate, servite cu tzatziki", 35, restaurant4.getIdRestaurant());
+        Produs produs11 = new Produs("Baklava", "Desert dulce cu nuci si miere", 16, restaurant4.getIdRestaurant());
+        Produs produs12 = new Produs("Ciorba de burta", "Supa acra de burta de vita", 20, restaurant5.getIdRestaurant());
+        Produs produs13 = new Produs("Mici", "Carnati mici din carne tocata, la gratar (4 buc)", 18, restaurant5.getIdRestaurant());
+        Produs produs14 = new Produs("Papanasi", "Gogosi cu branza dulce, smantana si dulceata", 17, restaurant5.getIdRestaurant());
+        Produs produs15 = new Produs("Tacos cu carne", "Trei tacos cu carne de vita sau pui, salsa si guacamole", 28, restaurant6.getIdRestaurant());
+        Produs produs16 = new Produs("Quesadilla cu branza", "Tortilla umpluta cu branza si legume", 24, restaurant6.getIdRestaurant());
+        Produs produs17 = new Produs("Churros cu ciocolata", "Patiserie prajita cu zahar si sos de ciocolata", 14, restaurant6.getIdRestaurant());
 
+        // Add products to their respective restaurants
         restaurant1.adaugaProdusInMeniu(produs1);
         restaurant1.adaugaProdusInMeniu(produs2);
         restaurant1.adaugaProdusInMeniu(produs3);
@@ -83,7 +85,7 @@ public class Service {
         ArrayList<Rider> riders = initializeRiders();
 
         System.out.println("Bine ai venit!");
-        
+
         Scanner scanner = new Scanner(System.in);
         while (true) {
             afiseazaMeniuPrincipal();
