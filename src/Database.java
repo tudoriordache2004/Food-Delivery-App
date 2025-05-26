@@ -11,9 +11,10 @@ public class Database {
     static {
         try (Connection conn = getConnection();
              Statement stmt = conn.createStatement()) {
+
             String createRestaurantTable = """
                     CREATE TABLE IF NOT EXISTS Restaurante (
-                        id INT PRIMARY KEY,
+                        id_restaurant INT AUTO_INCREMENT PRIMARY KEY,
                         nume VARCHAR(100),
                         adresa VARCHAR(200),
                         tip_mancare VARCHAR(50),
@@ -21,9 +22,10 @@ public class Database {
                     );
                     """;
             stmt.execute(createRestaurantTable);
+
             String createUserTable = """
                     CREATE TABLE IF NOT EXISTS Useri (
-                        id INT PRIMARY KEY,
+                        id INT AUTO_INCREMENT PRIMARY KEY,
                         nume VARCHAR(100),
                         prenume VARCHAR(100),
                         adresa VARCHAR(200),
@@ -35,7 +37,7 @@ public class Database {
 
             String createRiderTable = """
                     CREATE TABLE IF NOT EXISTS Rideri (
-                        id INT PRIMARY KEY,
+                        id INT AUTO_INCREMENT PRIMARY KEY,
                         nume VARCHAR(100),
                         prenume VARCHAR(100),
                         adresa VARCHAR(200),
@@ -47,14 +49,16 @@ public class Database {
 
             String createProdusTable = """
                     CREATE TABLE IF NOT EXISTS Produse (
-                        id INT PRIMARY KEY,
+                        id INT AUTO_INCREMENT PRIMARY KEY,
                         numeProdus VARCHAR(100),
                         descriere VARCHAR(200),
-                        pret INT
+                        pret INT,
+                        id_restaurant INT,
+                        FOREIGN KEY (id_restaurant) REFERENCES Restaurante(id_restaurant)
+                            ON DELETE CASCADE
                     );
                     """;
             stmt.execute(createProdusTable);
-
 
         } catch (SQLException e) {
             e.printStackTrace();

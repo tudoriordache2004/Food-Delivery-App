@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -10,63 +11,95 @@ public class Service {
     }
 
     private static ArrayList<Restaurant> initializeRestaurants() {
-        Restaurant restaurant1 = new Restaurant("Pizzeria Napoli", "Strada Florilor 12", "Italiana");
-        Restaurant restaurant2 = new Restaurant("Sushi Bar", "Bd. Unirii 20", "Japoneza");
-        Restaurant restaurant3 = new Restaurant("Bistro Francez", "Calea Victoriei 155", "Franceza");
-        Restaurant restaurant4 = new Restaurant("Taverna Greceasca", "Strada Lipscani 30", "Greaca");
-        Restaurant restaurant5 = new Restaurant("Casa Romaneasca", "Soseaua Kiseleff 5", "Romaneasca");
-        Restaurant restaurant6 = new Restaurant("Mexican Grill", "Bulevardul Magheru 42", "Mexicana");
-
-        // Initialize products with their respective restaurant IDs
-        Produs produs1 = new Produs("Pizza Margherita", "Pizza cu mozzarella si rosii", 30, restaurant1.getIdRestaurant());
-        Produs produs2 = new Produs("Burger Classic", "Burger cu vita si cartofi", 25, restaurant1.getIdRestaurant());
-        Produs produs3 = new Produs("Paste Carbonara", "Paste cu ou, bacon si parmezan", 35, restaurant1.getIdRestaurant());
-        Produs produs4 = new Produs("Sushi Set", "Sushi variat", 50, restaurant2.getIdRestaurant());
-        Produs produs5 = new Produs("Sashimi Mix", "Selectie de sashimi proaspat", 60, restaurant2.getIdRestaurant());
-        Produs produs6 = new Produs("Supa de ceapa gratinata", "Supa de ceapa cu crutoane si branza", 18, restaurant3.getIdRestaurant());
-        Produs produs7 = new Produs("Confit de rata", "Rata confiata cu cartofi sotati", 45, restaurant3.getIdRestaurant());
-        Produs produs8 = new Produs("Creme brulee", "Desert clasic cu vanilie si caramel crocant", 15, restaurant3.getIdRestaurant());
-        Produs produs9 = new Produs("Salata greceasca", "Salata cu rosii, castraveti, masline si feta", 22, restaurant4.getIdRestaurant());
-        Produs produs10 = new Produs("Souvlaki de pui", "Frigarui de pui marinate, servite cu tzatziki", 35, restaurant4.getIdRestaurant());
-        Produs produs11 = new Produs("Baklava", "Desert dulce cu nuci si miere", 16, restaurant4.getIdRestaurant());
-        Produs produs12 = new Produs("Ciorba de burta", "Supa acra de burta de vita", 20, restaurant5.getIdRestaurant());
-        Produs produs13 = new Produs("Mici", "Carnati mici din carne tocata, la gratar (4 buc)", 18, restaurant5.getIdRestaurant());
-        Produs produs14 = new Produs("Papanasi", "Gogosi cu branza dulce, smantana si dulceata", 17, restaurant5.getIdRestaurant());
-        Produs produs15 = new Produs("Tacos cu carne", "Trei tacos cu carne de vita sau pui, salsa si guacamole", 28, restaurant6.getIdRestaurant());
-        Produs produs16 = new Produs("Quesadilla cu branza", "Tortilla umpluta cu branza si legume", 24, restaurant6.getIdRestaurant());
-        Produs produs17 = new Produs("Churros cu ciocolata", "Patiserie prajita cu zahar si sos de ciocolata", 14, restaurant6.getIdRestaurant());
-
-        // Add products to their respective restaurants
-        restaurant1.adaugaProdusInMeniu(produs1);
-        restaurant1.adaugaProdusInMeniu(produs2);
-        restaurant1.adaugaProdusInMeniu(produs3);
-
-        restaurant2.adaugaProdusInMeniu(produs4);
-        restaurant2.adaugaProdusInMeniu(produs5);
-
-        restaurant3.adaugaProdusInMeniu(produs6);
-        restaurant3.adaugaProdusInMeniu(produs7);
-        restaurant3.adaugaProdusInMeniu(produs8);
-
-        restaurant4.adaugaProdusInMeniu(produs9);
-        restaurant4.adaugaProdusInMeniu(produs10);
-        restaurant4.adaugaProdusInMeniu(produs11);
-
-        restaurant5.adaugaProdusInMeniu(produs12);
-        restaurant5.adaugaProdusInMeniu(produs13);
-        restaurant5.adaugaProdusInMeniu(produs14);
-
-        restaurant6.adaugaProdusInMeniu(produs15);
-        restaurant6.adaugaProdusInMeniu(produs16);
-        restaurant6.adaugaProdusInMeniu(produs17);
-
         ArrayList<Restaurant> restaurante = new ArrayList<>();
-        restaurante.add(restaurant1);
-        restaurante.add(restaurant2);
-        restaurante.add(restaurant3);
-        restaurante.add(restaurant4);
-        restaurante.add(restaurant5);
-        restaurante.add(restaurant6);
+
+        try {
+            // Create restaurant objects
+            Restaurant restaurant1 = new Restaurant("Pizzeria Napoli", "Strada Florilor 12", "Italiana");
+            Restaurant restaurant2 = new Restaurant("Sushi Bar", "Bd. Unirii 20", "Japoneza");
+            Restaurant restaurant3 = new Restaurant("Bistro Francez", "Calea Victoriei 155", "Franceza");
+            Restaurant restaurant4 = new Restaurant("Taverna Greceasca", "Strada Lipscani 30", "Greaca");
+            Restaurant restaurant5 = new Restaurant("Casa Romaneasca", "Soseaua Kiseleff 5", "Romaneasca");
+            Restaurant restaurant6 = new Restaurant("Mexican Grill", "Bulevardul Magheru 42", "Mexicana");
+
+            // Insert restaurants into the database
+            restaurant1.insert(restaurant1);
+            restaurant2.insert(restaurant2);
+            restaurant3.insert(restaurant3);
+            restaurant4.insert(restaurant4);
+            restaurant5.insert(restaurant5);
+            restaurant6.insert(restaurant6);
+
+            // Add restaurants to the list
+            restaurante.add(restaurant1);
+            restaurante.add(restaurant2);
+            restaurante.add(restaurant3);
+            restaurante.add(restaurant4);
+            restaurante.add(restaurant5);
+            restaurante.add(restaurant6);
+
+            // Create and insert products for each restaurant
+            Produs produs1 = new Produs("Pizza Margherita", "Pizza cu mozzarella si rosii", 30, restaurant1.getIdRestaurant());
+            Produs produs2 = new Produs("Burger Classic", "Burger cu vita si cartofi", 25, restaurant1.getIdRestaurant());
+            Produs produs3 = new Produs("Paste Carbonara", "Paste cu ou, bacon si parmezan", 35, restaurant1.getIdRestaurant());
+            produs1.insert(produs1);
+            produs2.insert(produs2);
+            produs3.insert(produs3);
+            restaurant1.adaugaProdusInMeniu(produs1);
+            restaurant1.adaugaProdusInMeniu(produs2);
+            restaurant1.adaugaProdusInMeniu(produs3);
+
+            Produs produs4 = new Produs("Sushi Set", "Sushi variat", 50, restaurant2.getIdRestaurant());
+            Produs produs5 = new Produs("Sashimi Mix", "Selectie de sashimi proaspat", 60, restaurant2.getIdRestaurant());
+            produs4.insert(produs4);
+            produs5.insert(produs5);
+            restaurant2.adaugaProdusInMeniu(produs4);
+            restaurant2.adaugaProdusInMeniu(produs5);
+
+            Produs produs6 = new Produs("Supa de ceapa gratinata", "Supa de ceapa cu crutoane si branza", 18, restaurant3.getIdRestaurant());
+            Produs produs7 = new Produs("Confit de rata", "Rata confiata cu cartofi sotati", 45, restaurant3.getIdRestaurant());
+            Produs produs8 = new Produs("Creme brulee", "Desert clasic cu vanilie si caramel crocant", 15, restaurant3.getIdRestaurant());
+            produs6.insert(produs6);
+            produs7.insert(produs7);
+            produs8.insert(produs8);
+            restaurant3.adaugaProdusInMeniu(produs6);
+            restaurant3.adaugaProdusInMeniu(produs7);
+            restaurant3.adaugaProdusInMeniu(produs8);
+
+            Produs produs9 = new Produs("Salata greceasca", "Salata cu rosii, castraveti, masline si feta", 22, restaurant4.getIdRestaurant());
+            Produs produs10 = new Produs("Souvlaki de pui", "Frigarui de pui marinate, servite cu tzatziki", 35, restaurant4.getIdRestaurant());
+            Produs produs11 = new Produs("Baklava", "Desert dulce cu nuci si miere", 16, restaurant4.getIdRestaurant());
+            produs9.insert(produs9);
+            produs10.insert(produs10);
+            produs11.insert(produs11);
+            restaurant4.adaugaProdusInMeniu(produs9);
+            restaurant4.adaugaProdusInMeniu(produs10);
+            restaurant4.adaugaProdusInMeniu(produs11);
+
+            Produs produs12 = new Produs("Ciorba de burta", "Supa acra de burta de vita", 20, restaurant5.getIdRestaurant());
+            Produs produs13 = new Produs("Mici", "Carnati mici din carne tocata, la gratar (4 buc)", 18, restaurant5.getIdRestaurant());
+            Produs produs14 = new Produs("Papanasi", "Gogosi cu branza dulce, smantana si dulceata", 17, restaurant5.getIdRestaurant());
+            produs12.insert(produs12);
+            produs13.insert(produs13);
+            produs14.insert(produs14);
+            restaurant5.adaugaProdusInMeniu(produs12);
+            restaurant5.adaugaProdusInMeniu(produs13);
+            restaurant5.adaugaProdusInMeniu(produs14);
+
+            Produs produs15 = new Produs("Tacos cu carne", "Trei tacos cu carne de vita sau pui, salsa si guacamole", 28, restaurant6.getIdRestaurant());
+            Produs produs16 = new Produs("Quesadilla cu branza", "Tortilla umpluta cu branza si legume", 24, restaurant6.getIdRestaurant());
+            Produs produs17 = new Produs("Churros cu ciocolata", "Patiserie prajita cu zahar si sos de ciocolata", 14, restaurant6.getIdRestaurant());
+            produs15.insert(produs15);
+            produs16.insert(produs16);
+            produs17.insert(produs17);
+            restaurant6.adaugaProdusInMeniu(produs15);
+            restaurant6.adaugaProdusInMeniu(produs16);
+            restaurant6.adaugaProdusInMeniu(produs17);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return restaurante;
     }
 

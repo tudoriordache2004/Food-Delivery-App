@@ -102,7 +102,7 @@ public class Produs implements GenericService<Produs> {
 
     @Override
     public void insert(Produs produs) throws SQLException {
-        String sql = "INSERT INTO produse (nume_produs, descriere, pret, id_restaurant) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Produse (numeProdus, descriere, pret, id_restaurant) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = Database.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -130,7 +130,7 @@ public class Produs implements GenericService<Produs> {
 
     @Override
     public Produs cautaDupaID(int id) {
-        String sql = "SELECT * FROM produse WHERE id_produs = ?";
+        String sql = "SELECT * FROM Produse WHERE id = ?";
         Produs produs = null;
 
         try (Connection conn = Database.getConnection();
@@ -141,8 +141,8 @@ public class Produs implements GenericService<Produs> {
 
             if (rs.next()) {
                 produs = new Produs();
-                produs.idProdus = rs.getInt("id_produs");
-                produs.numeProdus = rs.getString("nume_produs");
+                produs.idProdus = rs.getInt("id");
+                produs.numeProdus = rs.getString("numeProdus");
                 produs.descriere = rs.getString("descriere");
                 produs.pret = rs.getInt("pret");
                 produs.idRestaurant = rs.getInt("id_restaurant");
@@ -154,10 +154,9 @@ public class Produs implements GenericService<Produs> {
         return produs;
     }
 
-
     @Override
     public List<Produs> cauta() {
-        String sql = "SELECT * FROM produse";
+        String sql = "SELECT * FROM Produse";
         List<Produs> produse = new ArrayList<>();
 
         try (Connection conn = Database.getConnection();
@@ -166,8 +165,8 @@ public class Produs implements GenericService<Produs> {
 
             while (rs.next()) {
                 Produs produs = new Produs();
-                produs.idProdus = rs.getInt("id_produs");
-                produs.numeProdus = rs.getString("nume_produs");
+                produs.idProdus = rs.getInt("id");
+                produs.numeProdus = rs.getString("numeProdus");
                 produs.descriere = rs.getString("descriere");
                 produs.pret = rs.getInt("pret");
                 produs.idRestaurant = rs.getInt("id_restaurant");
@@ -182,7 +181,7 @@ public class Produs implements GenericService<Produs> {
 
     @Override
     public void update(Produs produs) {
-        String sql = "UPDATE produse SET nume_produs = ?, descriere = ?, pret = ?, id_restaurant = ? WHERE id_produs = ?";
+        String sql = "UPDATE Produse SET numeProdus = ?, descriere = ?, pret = ?, id_restaurant = ? WHERE id = ?";
 
         try (Connection conn = Database.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -201,7 +200,7 @@ public class Produs implements GenericService<Produs> {
 
     @Override
     public void delete(int id) {
-        String sql = "DELETE FROM produse WHERE id_produs = ?";
+        String sql = "DELETE FROM Produse WHERE id = ?";
 
         try (Connection conn = Database.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {

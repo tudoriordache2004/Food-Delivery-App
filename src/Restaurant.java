@@ -4,24 +4,13 @@ import java.util.HashSet;
 import java.util.List;
 
 public class Restaurant implements GenericService<Restaurant> {
-    private static int nrRestaurante;
-    private int idRestaurant;
+    private int idRestaurant; // No manual assignment
     private String nume;
     private String adresa;
     private String tipMancare;
     private ArrayList<Produs> meniu;
     private HashSet<Recenzie> recenzii;
     private double medieRating;
-
-    // Bloc static
-    static {
-        nrRestaurante = 0;
-    }
-
-    // Bloc nestatic
-    {
-        this.idRestaurant = ++nrRestaurante;
-    }
 
     // Constructor fara parametri
     public Restaurant() {
@@ -38,8 +27,8 @@ public class Restaurant implements GenericService<Restaurant> {
         this.nume = nume;
         this.adresa = adresa;
         this.tipMancare = tipMancare;
-        this.recenzii = new HashSet<>();
         this.meniu = new ArrayList<>();
+        this.recenzii = new HashSet<>();
         this.medieRating = 0.00;
     }
 
@@ -142,7 +131,7 @@ public class Restaurant implements GenericService<Restaurant> {
     // Database connectivity methods
     @Override
     public void insert(Restaurant restaurant) throws SQLException {
-        String sql = "INSERT INTO restaurante (nume, adresa, tip_mancare, medie_rating) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Restaurante (nume, adresa, tip_mancare, medie_rating) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = Database.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -160,7 +149,7 @@ public class Restaurant implements GenericService<Restaurant> {
 
             try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    restaurant.idRestaurant = generatedKeys.getInt(1);
+                    restaurant.idRestaurant = generatedKeys.getInt(1); // Set the generated ID
                 } else {
                     throw new SQLException("Creating restaurant failed, no ID obtained.");
                 }
@@ -170,7 +159,7 @@ public class Restaurant implements GenericService<Restaurant> {
 
     @Override
     public Restaurant cautaDupaID(int id) {
-        String sql = "SELECT * FROM restaurante WHERE id_restaurant = ?";
+        String sql = "SELECT * FROM Restaurante WHERE id_restaurant = ?";
         Restaurant restaurant = null;
 
         try (Connection conn = Database.getConnection();
@@ -196,7 +185,7 @@ public class Restaurant implements GenericService<Restaurant> {
 
     @Override
     public List<Restaurant> cauta() {
-        String sql = "SELECT * FROM restaurante";
+        String sql = "SELECT * FROM Restaurante";
         List<Restaurant> restaurante = new ArrayList<>();
 
         try (Connection conn = Database.getConnection();
@@ -222,7 +211,7 @@ public class Restaurant implements GenericService<Restaurant> {
 
     @Override
     public void update(Restaurant restaurant) {
-        String sql = "UPDATE restaurante SET nume = ?, adresa = ?, tip_mancare = ?, medie_rating = ? WHERE id_restaurant = ?";
+        String sql = "UPDATE Restaurante SET nume = ?, adresa = ?, tip_mancare = ?, medie_rating = ? WHERE id_restaurant = ?";
 
         try (Connection conn = Database.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -241,7 +230,7 @@ public class Restaurant implements GenericService<Restaurant> {
 
     @Override
     public void delete(int id) {
-        String sql = "DELETE FROM restaurante WHERE id_restaurant = ?";
+        String sql = "DELETE FROM Restaurante WHERE id_restaurant = ?";
 
         try (Connection conn = Database.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
