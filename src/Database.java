@@ -30,7 +30,8 @@ public class Database {
                         prenume VARCHAR(100),
                         adresa VARCHAR(200),
                         varsta INT,
-                        email VARCHAR(100)
+                        email VARCHAR(100),
+                        parola VARCHAR(100)
                     );
                     """;
             stmt.execute(createUserTable);

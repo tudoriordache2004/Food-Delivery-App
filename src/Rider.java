@@ -25,7 +25,7 @@ public class Rider extends Persoana implements Comparable, GenericService<Rider>
     }
 
     // Constructor parametrizat
-    Rider(String nume, String prenume, String adresa, int varsta, String email) {
+    public Rider(String nume, String prenume, String adresa, int varsta, String email) {
         super(nume, prenume, adresa, varsta, email);
         livrari = new ArrayList<Comanda>();
     }

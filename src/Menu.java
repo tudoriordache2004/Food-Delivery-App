@@ -1,8 +1,15 @@
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.*;
 
-public class Service {
+
+public class Menu {
+    private UserService userService;
+    private LoginService loginService;
+
+    public Menu() {
+        this.userService = new UserService();
+        this.loginService = new LoginService(userService.getUtilizatori());
+    }
 
     public void afiseazaMeniuPrincipal() {
         System.out.println("1. Creare comanda");
@@ -10,11 +17,61 @@ public class Service {
         System.out.println("3. Iesire");
     }
 
+    public void initializare() throws InterruptedException, InputMismatchException, SQLException {
+        ArrayList<Restaurant> restaurante = initializeRestaurants();
+        ArrayList<Rider> riders = initializeRiders();
+
+        User user1 = new User("Popescu", "Ion", "Bucuresti", 25, "ion.popescu@gmail.com", "parola123");
+        User user2 = new User("Ionescu", "Maria", "Cluj", 30, "maria.ionescu@gmail.com", "parola456");
+        userService.adaugaUser(user1);
+        userService.adaugaUser(user2);
+
+        loginService = new LoginService(userService.getUtilizatori());
+
+        Scanner scanner = new Scanner(System.in);
+        User userLogat = null;
+
+        while (userLogat == null) {
+            System.out.println("Bine ai venit! Te rugăm să te autentifici.");
+            System.out.print("Email: ");
+            String email = scanner.nextLine();
+            System.out.print("Parola: ");
+            String parola = scanner.nextLine();
+
+            userLogat = loginService.login(email, parola);
+        }
+
+        System.out.println("Autentificare reușită! Bine ai venit, " + userLogat.getNume() + " " + userLogat.getPrenume() + "!");
+
+        while (true) {
+            afiseazaMeniuPrincipal();
+            try {
+                int optiune = scanner.nextInt();
+                switch (optiune) {
+                    case 1:
+                        creeazaComanda(userLogat, restaurante, riders, scanner);
+                        break;
+                    case 2:
+                        userService.comenziActive(userLogat);
+                        break;
+                    case 3:
+                        System.out.println("La revedere!");
+                        return;
+                    default:
+                        System.out.println("Optiune invalida.");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Introduceti un numar valid.");
+                scanner.nextLine();
+            }
+        }
+    }
+
     private static ArrayList<Restaurant> initializeRestaurants() {
         ArrayList<Restaurant> restaurante = new ArrayList<>();
 
         try {
-            // Create restaurant objects
             Restaurant restaurant1 = new Restaurant("Pizzeria Napoli", "Strada Florilor 12", "Italiana");
             Restaurant restaurant2 = new Restaurant("Sushi Bar", "Bd. Unirii 20", "Japoneza");
             Restaurant restaurant3 = new Restaurant("Bistro Francez", "Calea Victoriei 155", "Franceza");
@@ -101,48 +158,6 @@ public class Service {
         }
 
         return restaurante;
-    }
-
-    public void initializare() throws InterruptedException, InputMismatchException {
-        ArrayList<Restaurant> restaurante = initializeRestaurants();
-
-        User user1 = new User("Popescu", "Ion", "Bucuresti", 25, "ion.popescu@gmail.com");
-
-        Voucher voucher1 = new Voucher("X123F5G", 25, LocalDate.of(2025, 10, 30));
-        Voucher voucher2 = new Voucher("Y334FVG", 30, LocalDate.of(2025, 9, 22));
-
-
-        user1.adaugaVoucher(voucher1);
-        user1.adaugaVoucher(voucher2);
-
-        ArrayList<Rider> riders = initializeRiders();
-
-        System.out.println("Bine ai venit!");
-
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            afiseazaMeniuPrincipal();
-            try {
-                int optiune = scanner.nextInt();
-                switch (optiune) {
-                    case 1:
-                        creeazaComanda(user1, restaurante, riders, scanner);
-                        break;
-                    case 2:
-                        user1.comenziActive();
-                        break;
-                    case 3:
-                        System.out.println("La revedere!");
-                        return;
-                    default:
-                        System.out.println("Optiune invalida.");
-                        break;
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Introduceti un numar valid.");
-                scanner.nextLine();
-            }
-        }
     }
 
     private static ArrayList<Rider> initializeRiders() {
@@ -328,7 +343,7 @@ public class Service {
                 break;
             }
 
-            user.adaugaComanda(comanda);
+            userService.adaugaComanda(user, comanda);
             System.out.println("Comanda a fost plasata cu succes!");
             System.out.println("Detalii comanda: \n" + comanda);
             System.out.println("Pret total: " + comanda.calculeazaCostTotal());
@@ -387,7 +402,7 @@ public class Service {
                             scanner.nextLine();
                             String text = scanner.nextLine();
 
-                            user.adaugaRecenzie(alegereRestaurant, rating, text);
+                            userService.adaugaRecenzie(user, alegereRestaurant, rating, text);
                             System.out.println("Recenzia a fost adaugata cu succes!");
                             alegereRestaurant.actualizeazaMedieRating();
                             recenzieFinalizata = true;

@@ -1,4 +1,3 @@
-
 public class Recenzie {
     private static int nrRecenzii;
     private int idRecenzie;
