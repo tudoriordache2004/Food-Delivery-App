@@ -1,9 +1,11 @@
 # Food Delivery App
 
 ## Overview
+
 The Food Delivery App is a Java-based application designed to simulate the operations of a food delivery service. It allows users to register, log in, browse restaurants, place orders, and manage their accounts. The application also supports restaurant management, rider assignments, and voucher usage.
 
 ## Features
+
 - **User Management**: Register, log in, and manage user accounts.
 - **Restaurant Management**: Add, update, and view restaurant details, including menus and reviews.
 - **Order Management**: Create, view, and manage orders with real-time status updates.
@@ -12,6 +14,7 @@ The Food Delivery App is a Java-based application designed to simulate the opera
 - **Database Integration**: Persistent storage using MySQL.
 
 ## Project Structure
+
 The project is organized into the following modules:
 
 - **Modules**:
@@ -26,28 +29,35 @@ The project is organized into the following modules:
 ## Key Classes
 
 ### `User`
+
 Represents a user in the system with attributes like name, email, and a list of orders.
 
 ### `Restaurant`
+
 Manages restaurant details, including menu items and reviews.
 
 ### `Comanda`
+
 Handles order details, including the user, restaurant, and list of products.
 
 ### `Voucher`
+
 Implements a discount system with attributes like code, value, and expiration date.
 
 ### `Database`
+
 Provides database connectivity and initializes required tables.
 
 ## Setup Instructions
 
 ### Prerequisites
+
 - Java Development Kit (JDK) 8 or higher
 - MySQL Server
 - MySQL Connector for Java (included in `lib/` folder)
 
 ### Steps
+
 1. Clone the repository:
    ```bash
    git clone <repository-url>
@@ -66,6 +76,7 @@ Provides database connectivity and initializes required tables.
    ```
 
 ## Usage
+
 1. Start the application.
 2. Register or log in as a user.
 3. Browse restaurants and their menus.
@@ -73,10 +84,12 @@ Provides database connectivity and initializes required tables.
 5. Track the status of your order.
 
 ## Future Improvements
+
 - Add a graphical user interface (GUI).
 - Implement advanced search and filtering for restaurants and products.
 - Enhance security features, such as password encryption.
 - Add support for multiple languages.
 
 ## License
+
 This project is licensed under the MIT License. See the LICENSE file for details.

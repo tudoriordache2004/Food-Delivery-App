@@ -128,7 +128,6 @@ public class Restaurant implements GenericService<Restaurant> {
         }
     }
 
-    // Database connectivity methods
     @Override
     public void insert(Restaurant restaurant) throws SQLException {
         String sql = "INSERT INTO Restaurante (nume, adresa, tip_mancare, medie_rating) VALUES (?, ?, ?, ?)";

@@ -11,14 +11,16 @@ public class UserService implements GenericService<User> {
 
     public void adaugaUser(User user) throws SQLException {
         utilizatori.add(user);
+        insert(user);
         System.out.println("Utilizator adăugat cu succes: " + user.getNume() + " " + user.getPrenume());
+        AuditService.getInstance().logAction("Utilizator adaugat in baza de date.");
     }
-
 
     public void adaugaRecenzie(User user, Restaurant restaurant, int rating, String text) {
         Recenzie recenzie = new Recenzie(user, restaurant, rating, text);
         restaurant.adaugaRecenzie(recenzie);
         System.out.println("Recenzie adăugată pentru restaurantul: " + restaurant.getNume());
+        AuditService.getInstance().logAction("Recenzie adaugata.");
     }
 
     public void comenziActive(User user) {
@@ -34,6 +36,7 @@ public class UserService implements GenericService<User> {
 
     public void adaugaComanda(User user, Comanda comanda) {
         user.getComenzi().add(comanda);
+        AuditService.getInstance().logAction("Comanda finalizata.");
         System.out.println("Comandă adăugată pentru utilizatorul: " + user.getNume());
     }
 
@@ -47,7 +50,7 @@ public class UserService implements GenericService<User> {
     public void insert(User user) throws SQLException {
         String sql = "INSERT INTO Useri (nume, prenume, adresa, varsta, email, parola) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = Database.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             pstmt.setString(1, user.getNume());
             pstmt.setString(2, user.getPrenume());
@@ -75,7 +78,7 @@ public class UserService implements GenericService<User> {
     public User cautaDupaID(int id) {
         String sql = "SELECT * FROM Useri WHERE id = ?";
         try (Connection conn = Database.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
@@ -102,8 +105,8 @@ public class UserService implements GenericService<User> {
         String sql = "SELECT * FROM Useri";
         ArrayList<User> users = new ArrayList<>();
         try (Connection conn = Database.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 User user = new User();
@@ -126,7 +129,7 @@ public class UserService implements GenericService<User> {
     public void update(User user) {
         String sql = "UPDATE Useri SET nume = ?, prenume = ?, adresa = ?, varsta = ?, email = ?, parola = ? WHERE id = ?";
         try (Connection conn = Database.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, user.getNume());
             pstmt.setString(2, user.getPrenume());
@@ -146,7 +149,7 @@ public class UserService implements GenericService<User> {
     public void delete(int id) {
         String sql = "DELETE FROM Useri WHERE id = ?";
         try (Connection conn = Database.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setInt(1, id);
             pstmt.executeUpdate();

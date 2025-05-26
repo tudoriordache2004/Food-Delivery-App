@@ -11,10 +11,12 @@ public class LoginService {
         for (User user : utilizatori) {
             if (user.getEmail().equals(email) && user.getParola().equals(parola)) {
                 System.out.println("Autentificare reușită! Bine ai venit, " + user.getNume() + "!");
+                AuditService.getInstance().logAction("Utilizator logat.");
                 return user;
             }
         }
         System.out.println("Autentificare eșuată! Email sau parolă incorectă.");
+        AuditService.getInstance().logAction("Actiune de logare esuata.");
         System.out.println(email);
         System.out.println(parola);
         return null;
@@ -23,5 +25,6 @@ public class LoginService {
     public void register(User user) {
         utilizatori.add(user);
         System.out.println("Utilizator înregistrat cu succes!");
+        AuditService.getInstance().logAction("Inregistrare utilizator");
     }
 }

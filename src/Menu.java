@@ -79,7 +79,6 @@ public class Menu {
             Restaurant restaurant5 = new Restaurant("Casa Romaneasca", "Soseaua Kiseleff 5", "Romaneasca");
             Restaurant restaurant6 = new Restaurant("Mexican Grill", "Bulevardul Magheru 42", "Mexicana");
 
-            // Insert restaurants into the database
             restaurant1.insert(restaurant1);
             restaurant2.insert(restaurant2);
             restaurant3.insert(restaurant3);
@@ -87,7 +86,6 @@ public class Menu {
             restaurant5.insert(restaurant5);
             restaurant6.insert(restaurant6);
 
-            // Add restaurants to the list
             restaurante.add(restaurant1);
             restaurante.add(restaurant2);
             restaurante.add(restaurant3);
@@ -95,7 +93,6 @@ public class Menu {
             restaurante.add(restaurant5);
             restaurante.add(restaurant6);
 
-            // Create and insert products for each restaurant
             Produs produs1 = new Produs("Pizza Margherita", "Pizza cu mozzarella si rosii", 30, restaurant1.getIdRestaurant());
             Produs produs2 = new Produs("Burger Classic", "Burger cu vita si cartofi", 25, restaurant1.getIdRestaurant());
             Produs produs3 = new Produs("Paste Carbonara", "Paste cu ou, bacon si parmezan", 35, restaurant1.getIdRestaurant());
