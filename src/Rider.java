@@ -48,6 +48,10 @@ public class Rider extends Persoana implements Comparable, GenericService<Rider>
         return idRider;
     }
 
+    public void setIdRider(int id){
+        this.idRider = id;
+    }
+
     public void adaugaComanda(Comanda comanda)
     {
         livrari.add(comanda);

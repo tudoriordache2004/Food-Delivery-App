@@ -14,7 +14,11 @@ public class Menu {
     public void afiseazaMeniuPrincipal() {
         System.out.println("1. Creare comanda");
         System.out.println("2. Vizualizare comenzi active");
-        System.out.println("3. Iesire");
+        System.out.println("3. Create");
+        System.out.println("4. Read");
+        System.out.println("5. Update");
+        System.out.println("6. Delete");
+        System.out.println("7. Iesire");
     }
 
     public void initializare() throws InterruptedException, InputMismatchException, SQLException {
@@ -55,6 +59,18 @@ public class Menu {
                         userService.comenziActive(userLogat);
                         break;
                     case 3:
+                        create(scanner);
+                        break;
+                    case 4:
+                        read(scanner);
+                        break;
+                    case 5:
+                        update(scanner);
+                        break;
+                    case 6:
+                        delete(scanner);
+                        break;
+                    case 7:
                         System.out.println("La revedere!");
                         return;
                     default:
@@ -413,6 +429,200 @@ public class Menu {
                         System.out.println("Optiune invalida.");
                 }
             }
+        }
+    }
+
+    public void create(Scanner scanner) throws SQLException {
+        System.out.println("Ce doriti sa creati?");
+        System.out.println("1. User");
+        System.out.println("2. Restaurant");
+        System.out.println("3. Rider");
+        int optiune = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (optiune) {
+            case 1:
+                System.out.println("Introduceti numele:");
+                String nume = scanner.nextLine();
+                System.out.println("Introduceti prenumele:");
+                String prenume = scanner.nextLine();
+                System.out.println("Introduceti adresa:");
+                String adresa = scanner.nextLine();
+                System.out.println("Introduceti varsta:");
+                int varsta = scanner.nextInt();
+                scanner.nextLine();
+                System.out.println("Introduceti email-ul:");
+                String email = scanner.nextLine();
+                System.out.println("Introduceti parola:");
+                String parola = scanner.nextLine();
+
+                User user = new User(nume, prenume, adresa, varsta, email, parola);
+                userService.adaugaUser(user);
+                System.out.println("User creat cu succes!");
+                break;
+
+            case 2:
+                System.out.println("Introduceti numele restaurantului:");
+                String numeRestaurant = scanner.nextLine();
+                System.out.println("Introduceti adresa restaurantului:");
+                String adresaRestaurant = scanner.nextLine();
+                System.out.println("Introduceti tipul de mancare:");
+                String tipMancare = scanner.nextLine();
+
+                Restaurant restaurant = new Restaurant(numeRestaurant, adresaRestaurant, tipMancare);
+                restaurant.insert(restaurant);
+                System.out.println("Restaurant creat cu succes!");
+                break;
+
+            case 3:
+                System.out.println("Introduceti numele riderului:");
+                String numeRider = scanner.nextLine();
+                System.out.println("Introduceti prenumele riderului:");
+                String prenumeRider = scanner.nextLine();
+                System.out.println("Introduceti adresa riderului:");
+                String adresaRider = scanner.nextLine();
+                System.out.println("Introduceti varsta riderului:");
+                int varstaRider = scanner.nextInt();
+                scanner.nextLine();
+                System.out.println("Introduceti email-ul riderului:");
+                String emailRider = scanner.nextLine();
+
+                Rider rider = new Rider(numeRider, prenumeRider, adresaRider, varstaRider, emailRider);
+                rider.insert(rider);
+                System.out.println("Rider creat cu succes!");
+                break;
+
+            default:
+                System.out.println("Optiune invalida.");
+        }
+    }
+
+    public void read(Scanner scanner) throws SQLException {
+        System.out.println("Ce doriti sa cititi?");
+        System.out.println("1. Useri");
+        System.out.println("2. Restaurante");
+        System.out.println("3. Rideri");
+        int optiune = scanner.nextInt();
+
+        switch (optiune) {
+            case 1:
+                for (User user : userService.getUtilizatori()) {
+                    System.out.println(user);
+                }
+                break;
+
+            case 2:
+                for (Restaurant restaurant : initializeRestaurants()) {
+                    System.out.println(restaurant);
+                }
+                break;
+
+            case 3:
+                for (Rider rider : initializeRiders()) {
+                    System.out.println(rider);
+                }
+                break;
+
+            default:
+                System.out.println("Optiune invalida.");
+        }
+    }
+
+    public void update(Scanner scanner) throws SQLException {
+        System.out.println("Ce doriti sa actualizati?");
+        System.out.println("1. User");
+        System.out.println("2. Restaurant");
+        System.out.println("3. Rider");
+        int optiune = scanner.nextInt();
+        scanner.nextLine(); // Consumăm newline-ul
+
+        switch (optiune) {
+            case 1:
+                System.out.println("Introduceti ID-ul utilizatorului:");
+                int idUser = scanner.nextInt();
+                scanner.nextLine(); // Consumăm newline-ul
+                System.out.println("Introduceti noul nume:");
+                String nume = scanner.nextLine();
+                System.out.println("Introduceti noul prenume:");
+                String prenume = scanner.nextLine();
+
+                User user = userService.cautaDupaID(idUser);
+                if (user != null) {
+                    user.setNume(nume);
+                    user.setPrenume(prenume);
+                    userService.update(user);
+                    System.out.println("User actualizat cu succes!");
+                } else {
+                    System.out.println("Userul nu a fost gasit.");
+                }
+                break;
+
+            case 2:
+                System.out.println("Introduceti ID-ul restaurantului:");
+                int idRestaurant = scanner.nextInt();
+                scanner.nextLine(); // Consumăm newline-ul
+                System.out.println("Introduceti noul nume:");
+                String numeRestaurant = scanner.nextLine();
+
+                Restaurant restaurant = new Restaurant(); // Exemplu
+                restaurant.setIdRestaurant(idRestaurant);
+                restaurant.setNume(numeRestaurant);
+                restaurant.update(restaurant);
+                System.out.println("Restaurant actualizat cu succes!");
+                break;
+
+            case 3:
+                System.out.println("Introduceti ID-ul riderului:");
+                int idRider = scanner.nextInt();
+                scanner.nextLine(); // Consumăm newline-ul
+                System.out.println("Introduceti noul nume:");
+                String numeRider = scanner.nextLine();
+
+                Rider rider = new Rider(); // Exemplu
+                rider.setIdRider(idRider);
+                rider.setNume(numeRider);
+                rider.update(rider);
+                System.out.println("Rider actualizat cu succes!");
+                break;
+
+            default:
+                System.out.println("Optiune invalida.");
+        }
+    }
+
+    public void delete(Scanner scanner) throws SQLException {
+        System.out.println("Ce doriti sa stergeti?");
+        System.out.println("1. User");
+        System.out.println("2. Restaurant");
+        System.out.println("3. Rider");
+        int optiune = scanner.nextInt();
+
+        switch (optiune) {
+            case 1:
+                System.out.println("Introduceti ID-ul utilizatorului:");
+                int idUser = scanner.nextInt();
+                userService.delete(idUser);
+                System.out.println("User sters cu succes!");
+                break;
+
+            case 2:
+                System.out.println("Introduceti ID-ul restaurantului:");
+                int idRestaurant = scanner.nextInt();
+                Restaurant restaurant = new Restaurant();
+                restaurant.delete(idRestaurant);
+                System.out.println("Restaurant sters cu succes!");
+                break;
+
+            case 3:
+                System.out.println("Introduceti ID-ul riderului:");
+                int idRider = scanner.nextInt();
+                Rider rider = new Rider();
+                rider.delete(idRider);
+                System.out.println("Rider sters cu succes!");
+                break;
+
+            default:
+                System.out.println("Optiune invalida.");
         }
     }
 

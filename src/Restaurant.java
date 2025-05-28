@@ -86,6 +86,11 @@ public class Restaurant implements GenericService<Restaurant> {
         this.tipMancare = tipMancare;
     }
 
+    public void setIdRestaurant(int id)
+    {
+        this.idRestaurant = id;
+    }
+
 
     // Alte metode
     @Override
@@ -148,7 +153,7 @@ public class Restaurant implements GenericService<Restaurant> {
 
             try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    restaurant.idRestaurant = generatedKeys.getInt(1); // Set the generated ID
+                    restaurant.idRestaurant = generatedKeys.getInt(1);
                 } else {
                     throw new SQLException("Creating restaurant failed, no ID obtained.");
                 }
